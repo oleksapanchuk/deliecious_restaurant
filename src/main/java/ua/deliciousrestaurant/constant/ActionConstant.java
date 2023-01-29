@@ -13,6 +13,7 @@ public final class ActionConstant {
     public static final String ACTION_INC_DEC_QUANTITY = "inc-dec-quantity";
     public static final String ACTION_ORDER_ALL = "order-all";
     public static final String ACTION_VIEW_MENU = "view-menu";
+    public static final String ACTION_VIEW_CART = "view-cart";
     public static final String ACTION_VIEW_ORDERS_FOR_USER = "view-orders-for-user";
     public static final String ACTION_SET_LIKE_FOR_ORDER = "set-like-for-order";
 
@@ -21,7 +22,8 @@ public final class ActionConstant {
     public static final String CONTROLLER_PAGE = "controller";
     public static final String INDEX_PAGE = "index.jsp";
     public static final String MENU_PAGE = "menu.jsp";
-    public static final String CART_PAGE = "cart.jsp";
+    public static final String CART_PAGE = "controller?action="  + ACTION_VIEW_CART;
+    public static final String CART_PAGE_JSP = "cart.jsp";
     public static final String ORDERS_PAGE = "controller?action=" + ACTION_VIEW_ORDERS_FOR_USER;
     public static final String ORDERS_PAGE_JSP = "orders.jsp";
 
@@ -44,6 +46,10 @@ public final class ActionConstant {
     public static final String REG_FIRST_NAME = "fname";
     public static final String REG_LAST_NAME = "lname";
     public static final String REG_ADDRESS = "address";
+
+
+
+    public static final String CART_LIST = "cart-list";
 
 
 

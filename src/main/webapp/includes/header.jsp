@@ -19,7 +19,7 @@
                 </c:if>
 
                 <c:if test="${ sessionScope.role eq null or sessionScope.role eq 'CLIENT'}">
-                    <li><a href="cart.jsp" class="nav-link px-2 menu-item">Cart <span class="badge btn-warning px-2">${ cart_list.size() }</span></a></li>
+                    <li><a href="controller?action=view-cart" class="nav-link px-2 menu-item">Cart <span class="badge btn-warning px-2">${ cart_list.size() }</span></a></li>
                     <li><a href="about_us.jsp" class="nav-link px-2 menu-item">About</a></li>
                 </c:if>
 

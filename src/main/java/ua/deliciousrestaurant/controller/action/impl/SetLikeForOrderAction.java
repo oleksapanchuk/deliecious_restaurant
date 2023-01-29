@@ -1,6 +1,7 @@
 package ua.deliciousrestaurant.controller.action.impl;
 
 import ua.deliciousrestaurant.controller.action.Action;
+import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.service.ServiceFactory;
 
@@ -17,9 +18,11 @@ public class SetLikeForOrderAction implements Action {
         int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
         String isLikedStatus = request.getParameter(IS_LIKED_ORDER);
 
-//        ServiceFactory.getInstance().getOrderService().setLikeDislike(orderId, isLikedStatus)
-
-
+        try {
+            ServiceFactory.getInstance().getOrderService().setLikeDislike(orderId, isLikedStatus);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
 
 
         return ORDERS_PAGE;

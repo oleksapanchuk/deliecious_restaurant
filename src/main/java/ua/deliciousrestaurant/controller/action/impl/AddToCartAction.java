@@ -11,13 +11,13 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.deliciousrestaurant.constant.ActionConstant.MENU_PAGE;
+import static ua.deliciousrestaurant.constant.ActionConstant.*;
 
 public class AddToCartAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Cart> cartList = new ArrayList<>();
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter(PRODUCT_ID));
 
         Cart cartProducts = Cart.builder()
                 .product(Product.builder().idProduct(id).build())
@@ -25,11 +25,11 @@ public class AddToCartAction implements Action {
                 .build();
 
         HttpSession session = request.getSession();
-        List<Cart> sessionCartList = (ArrayList<Cart>) session.getAttribute("cart-list");
+        List<Cart> sessionCartList = (ArrayList<Cart>) session.getAttribute(CART_LIST);
 
         if (sessionCartList == null) {
             cartList.add(cartProducts);
-            session.setAttribute("cart-list", cartList);
+            session.setAttribute(CART_LIST, cartList);
             return MENU_PAGE;
         } else {
             cartList = sessionCartList;
@@ -40,6 +40,7 @@ public class AddToCartAction implements Action {
                     exist = true;
                     //todo
                     //out.println("<h3 style='color:crimson; text-align:center'> Item already exist in cart. <a href='cart.jsp'> Go to Cart page!<a></h3> ");
+                    break;
                 }
             }
 

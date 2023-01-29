@@ -30,8 +30,10 @@ public final class ActionFactory {
             actionMap.put(ACTION_INC_DEC_QUANTITY, new QuantityIncDecAction());
             actionMap.put(ACTION_ORDER_ALL, new OrderAllAction());
             actionMap.put(ACTION_VIEW_MENU, new ViewMenuAction());
+            actionMap.put(ACTION_VIEW_CART, new ViewCartAction());
             actionMap.put(ACTION_VIEW_ORDERS_FOR_USER, new ViewOrdersForUserAction());
             actionMap.put(ACTION_SET_LIKE_FOR_ORDER, new SetLikeForOrderAction());
+
 
         }
 

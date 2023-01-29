@@ -110,14 +110,18 @@ public class OrderDAOImpl implements OrderDAO {
     public boolean updateLikedStatus(int orderId, int isLikedStatus) throws DaoException {
 
         try (Connection con = DataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement(UPDATE_LIKED_STATUS_ORDER)){
-//todo
+             PreparedStatement pst = con.prepareStatement(UPDATE_LIKED_STATUS_ORDER)) {
+
+            pst.setInt(1, isLikedStatus);
+            pst.setInt(2, orderId);
+
+            if (pst.executeUpdate() > 0) return true;
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DaoException(e);
         }
 
-
-        return true;
+        return false;
     }
 
     private boolean insertProductsIntoOrder(Order order) {

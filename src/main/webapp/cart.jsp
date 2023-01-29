@@ -2,26 +2,12 @@
 <%@ page import="ua.deliciousrestaurant.model.entity.Cart" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="ua.deliciousrestaurant.model.dao.DaoFactory" %>
+<%@ page import="ua.deliciousrestaurant.service.ServiceFactory" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="resources"/>
-
-<%
-
-    List<Cart> sessionCartList = (ArrayList<Cart>) session.getAttribute("cart-list");
-    List<Cart> cartList = null;
-    if (sessionCartList != null) {
-        cartList = DaoFactory.getInstance().getProductDAO().getCartProducts(sessionCartList);
-        request.setAttribute("cart_items", cartList);
-        session.setAttribute("cart_list", sessionCartList);
-
-        request.setAttribute("totalPrice", DaoFactory.getInstance().getProductDAO().getTotalCartPrice(sessionCartList));
-    }
-
-%>
-
 
 <!DOCTYPE html>
 <html lang="en">

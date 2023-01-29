@@ -14,7 +14,7 @@ public final class ServiceFactory {
     private ServiceFactory() { }
 
     public static synchronized ServiceFactory getInstance() {
-        if (serviceFactory != null) {
+        if (serviceFactory == null) {
             serviceFactory = new ServiceFactory();
             serviceFactory.clientService = new ClientServiceImpl();
             serviceFactory.orderService = new OrderServiceImpl();
