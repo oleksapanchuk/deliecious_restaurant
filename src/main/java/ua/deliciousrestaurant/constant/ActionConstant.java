@@ -61,6 +61,18 @@ public final class ActionConstant {
     public static final String ORDER_LIST = "order_list";
 
 
+    public static final String SORT_FIELD = "sort-field";
+    public static final String SORT_ORDER = "sort-order";
+    public static final String CATEGORY_FILTER = "category-filter-id";
+    public static final String OFFSET = "offset";
+    public static final String RECORDS = "records";
+
+    public static final String TOTAL_PAGES = "total_pages";
+    public static final String CURRENT_PAGE = "cur_page";
+    public static final String START_PAGE = "start";
+    public static final String END_PAGE = "end";
+
+
 
 
 
@@ -73,6 +85,8 @@ public final class ActionConstant {
     /* VALUES PARAMETERS */
     public static final String INCREMENT = "inc";
     public static final String DECREMENT = "dec";
+
+
 
 
 

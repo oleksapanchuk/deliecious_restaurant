@@ -3,6 +3,7 @@ package ua.deliciousrestaurant.model.dao.mysql;
 import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.dao.ProductDAO;
+import ua.deliciousrestaurant.model.dto.ProductDTO;
 import ua.deliciousrestaurant.model.entity.Cart;
 import ua.deliciousrestaurant.model.entity.Product;
 
@@ -20,14 +21,16 @@ import static ua.deliciousrestaurant.constant.DBConstant.GET_TOTAL_PRICE;
 public class ProductDAOImpl implements ProductDAO {
 
     @Override
-    public List<Product> getAllProduct(String query) throws DaoException {
+    public List<ProductDTO> getAllProduct(String query) throws DaoException {
 
-        List<Product> products = new ArrayList<>();
+        List<ProductDTO> products = new ArrayList<>();
 
         try (Connection con = DataSource.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
-
+            System.out.println(query);
             ps.executeQuery();
+
+
 
             try (ResultSet rs = ps.getResultSet()) {
                 while (rs.next()) {
@@ -51,7 +54,14 @@ public class ProductDAOImpl implements ProductDAO {
             ps.setInt(1, productId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return Optional.of(productBuilder(rs));
+                    return Optional.of(Product.builder()
+                            .idProduct(rs.getInt(1))
+                            .nameProduct(rs.getString(2))
+                            .categoryName(rs.getString(3))
+                            .costProduct(rs.getInt(4))
+                            .weightProduct(rs.getInt(5))
+                            .imgProduct(rs.getString(6))
+                            .build());
                 }
             }
 
@@ -88,14 +98,15 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
 
-    private Product productBuilder(ResultSet rs) throws SQLException {
-        return Product.builder()
+    private ProductDTO productBuilder(ResultSet rs) throws SQLException {
+        return ProductDTO.builder()
                 .idProduct(rs.getInt(1))
                 .nameProduct(rs.getString(2))
                 .categoryName(rs.getString(3))
                 .costProduct(rs.getInt(4))
                 .weightProduct(rs.getInt(5))
                 .imgProduct(rs.getString(6))
+                .categoryId(rs.getInt(7))
                 .build();
     }
 }

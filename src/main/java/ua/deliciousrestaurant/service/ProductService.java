@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductService {
 
     List<Cart> getCartProducts(List<Cart> cartList) throws DaoException;
+    int getNumberOfProducts(String query) throws DaoException;
 }

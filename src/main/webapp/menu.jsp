@@ -24,7 +24,9 @@
     <div class="card-header my-3">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center text-uppercase color1 mb-5">Виберіть категорію</h2>
+                <h2 class="text-center text-uppercase color1 mb-5">
+                    <fmt:message key="choose.category"/>
+                </h2>
             </div>
         </div>
 
@@ -41,7 +43,7 @@
                                 data-mdb-toggle="dropdown"
                                 aria-expanded="false"
                         >
-                            Dropdown link
+                            <fmt:message key="category.all"/>
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -60,13 +62,14 @@
 
                 <div class="col-2 mb-4">
                     <div class="input-group">
-                        <input type="search" class="form-control border-danger text-danger rounded" placeholder="Search" aria-label="Search"
+                        <input type="search" class="form-control border-danger text-danger rounded" placeholder="Search"
+                               aria-label="Search"
                                aria-describedby="search-addon"/>
                     </div>
                 </div>
                 <div class="col-xl-1 mb-4">
                     <div class="input-group">
-                        <button type="submit" class="btn btn-outline-danger">
+                        <button type="submit" class="btn btn-outline-danger" href="#">
                             <fmt:message key="search"/>
                         </button>
                     </div>
@@ -84,11 +87,16 @@
                     <img class="card-img-top" src="${ product.getImgProduct() }" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">${ product.getNameProduct() }</h5>
-                        <h5 class="card-title">Price: ${ product.getCostProduct() }</h5>
-                        <h5 class="card-title">Category: ${ product.getCategoryName() }</h5>
+                        <h5 class="card-title"><fmt:message key="price"/>${ product.getCostProduct() }</h5>
+                        <h5 class="card-title"><fmt:message key="category"/>${ product.getCategoryName() }</h5>
                         <div class="mt-3 d-flex justify-content-between">
-                            <a href="controller?action=atc&id=${ product.getIdProduct() }" class="btn btn-danger">Add to cart</a>
-                            <a href="controller?action=order-now&prod-id=${ product.getIdProduct() }&quantity=1" class="btn btn-warning">Buy now</a>
+                            <a href="controller?action=atc&id=${ product.getIdProduct() }" class="btn btn-danger">
+                                <fmt:message key="add.to.cart"/>
+                            </a>
+                            <a href="controller?action=order-now&prod-id=${ product.getIdProduct() }&quantity=1"
+                               class="btn btn-warning">
+                                <fmt:message key="buy.now"/>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -98,28 +106,9 @@
     </div>
 </div>
 
-<section class="about">
-    <div class="container">
-
-
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</section>
-
-
+<c:set var="href" scope="request"
+       value="controller?action=view-menu&sort-field=p.category_id&sort-order=asc&category-filter-id=0&"/>
+<jsp:include page="includes/pagination.jsp"/>
 
 <jsp:include page="includes/footer.jsp"/>
 
