@@ -16,7 +16,9 @@
 
 <jsp:include page="includes/header.jsp"/>
 
+<div class="container min-size-2">
 
+</div>
 
 <jsp:include page="includes/footer.jsp"/>
 

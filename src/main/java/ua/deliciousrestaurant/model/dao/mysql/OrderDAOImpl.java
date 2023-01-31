@@ -60,8 +60,9 @@ public class OrderDAOImpl implements OrderDAO {
 
         List<Order> orders = new ArrayList<>();
 
-        try (Connection con = DataSource.getConnection()) {
-            PreparedStatement pst = con.prepareStatement(GET_CLIENT_ORDERS);
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(GET_CLIENT_ORDERS)) {
+;
             pst.setInt(1, id);
 
             try (ResultSet rs = pst.executeQuery()) {
@@ -77,33 +78,37 @@ public class OrderDAOImpl implements OrderDAO {
                 }
             }
 
-            if (!orders.isEmpty()) {
-                pst = con.prepareStatement(GET_PRODUCTS_FROM_ORDER);
-
-                for (Order order : orders) {
-                    pst.setInt(1, order.getOrderId());
-                    List<Cart> products = new ArrayList<>();
-
-                    try (ResultSet rs = pst.executeQuery()) {
-                        while (rs.next()) {
-                            products.add(Cart.builder()
-                                    .product(DaoFactory.getInstance().getProductDAO().getProductById(rs.getInt(2)).get())
-                                    .quantity(rs.getInt(3))
-                                    .build());
-                        }
-                    }
-                    order.setOrderProducts(products);
-                    pst.clearParameters();
-                }
-            }
-
-            pst.close();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-
         return orders;
+    }
+
+    @Override
+    public List<Cart> getProductsFromOrder(int orderId) throws DaoException {
+
+        List<Cart> listCart = new ArrayList<>();
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(GET_PRODUCTS_FROM_ORDER)) {
+
+            pst.setInt(1, orderId);
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    listCart.add(Cart.builder()
+                            .product(DaoFactory.getInstance().getProductDAO().getProductById(rs.getInt(2)).get())
+                            .quantity(rs.getInt(3))
+                            .build());
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+
+        return listCart;
     }
 
     @Override

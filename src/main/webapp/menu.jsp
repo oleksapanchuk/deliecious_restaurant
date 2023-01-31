@@ -20,7 +20,7 @@
 <jsp:include page="includes/header.jsp"/>
 
 
-<div class="container">
+<div class="container min-size-1">
     <div class="card-header my-3">
         <div class="row">
             <div class="col-12">

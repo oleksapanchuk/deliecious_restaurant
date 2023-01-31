@@ -20,6 +20,14 @@ footer {
     background-color: var(--color3);
 }
 
+.min-size-1 {
+    min-height: 430px;
+}
+
+.min-size-2 {
+    min-height: 430px;
+}
+
 .a_btn-1 {
     color: var(--color4);
 }

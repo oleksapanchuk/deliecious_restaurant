@@ -1,7 +1,5 @@
 package ua.deliciousrestaurant.controller.action;
 
-import lombok.Getter;
-import lombok.Setter;
 import ua.deliciousrestaurant.controller.action.impl.*;
 
 import java.util.HashMap;
@@ -25,10 +23,10 @@ public final class ActionFactory {
             actionMap.put(ACTION_LOGOUT, new LogoutAction());
 
             actionMap.put(ACTION_ADD_TO_CART, new AddToCartAction());
-            actionMap.put(ACTION_ORDER_NOW, new OrderNowAction());
+            actionMap.put(ACTION_ORDER_NOW, new BuyNowAction());
             actionMap.put(ACTION_REMOVE_FROM_CART, new RemoveFromCartAction());
             actionMap.put(ACTION_INC_DEC_QUANTITY, new QuantityIncDecAction());
-            actionMap.put(ACTION_ORDER_ALL, new OrderAllAction());
+            actionMap.put(ACTION_ORDER_ALL, new BuyAllAction());
             actionMap.put(ACTION_VIEW_MENU, new ViewMenuAction());
             actionMap.put(ACTION_VIEW_CART, new ViewCartAction());
             actionMap.put(ACTION_VIEW_ORDERS_FOR_USER, new ViewOrdersForUserAction());

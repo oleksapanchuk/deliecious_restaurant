@@ -15,46 +15,98 @@
 
 <jsp:include page="includes/header.jsp"/>
 
-<div class="col-lg-5 mx-auto p-4 py-md-5">
-    <tags:header value="sign.up"/>
+<section class="vh-200" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-    <form method="POST" action="controller">
-        <input type="hidden" name="action" value="sign-up">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><fmt:message key="sign.up"/></p>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputFirstName"><fmt:message key="first.name"/></label>
-                <input type="password" class="form-control" id="inputFirstName" placeholder="<fmt:message key="first.name"/>">
-            </div>
+                                <form method="post" class="mx-1 mx-md-4">
+                                    <input type="hidden" name="action" value="sign-up">
 
-            <div class="form-group col-md-6">
-                <label for="inputLastName"><fmt:message key="last.name"/></label>
-                <input type="password" class="form-control" id="inputLastName" placeholder="<fmt:message key="last.name"/>">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputEmail"><fmt:message key="email.address"/></label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="<fmt:message key="email.address"/>">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword"><fmt:message key="password"/></label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="<fmt:message key="password"/>">
-            </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa-regular fa-user fa-lg me-3 fa-fw  mb-4"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="inputFirstName" class="form-control" />
+                                            <label class="form-label" for="inputFirstName"><fmt:message key="first.name"/></label>
+                                        </div>
+                                    </div>
 
-            <div class="form-group col-md-6">
-                <label for="inputAddress"><fmt:message key="address"/></label>
-                <input type="password" class="form-control" id="inputAddress" placeholder="<fmt:message key="address"/>">
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw mb-4"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="inputLastName" class="form-control" />
+                                            <label class="form-label" for="inputLastName"><fmt:message key="last.name"/></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw  mb-4"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="email" id="inputEmail" class="form-control" />
+                                            <label class="form-label" for="inputEmail"><fmt:message key="email.address"/></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw  mb-4"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="password" id="inputPassword" class="form-control" />
+                                            <label class="form-label" for="inputPassword"><fmt:message key="password"/></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw  mb-4"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="password" id="inputPasswordAgain" class="form-control" />
+                                            <label class="form-label" for="inputPasswordAgain"><fmt:message key="sing_up.repeat.pass" /></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa-solid fa-location-pin fa-lg me-3 fa-fw  mb-4"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="password" id="inputAddress" class="form-control" />
+                                            <label class="form-label" for="inputAddress"><fmt:message key="address" /></label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="button" class="btn btn-primary btn-lg">Register</button>
+                                    </div>
+
+                                    <p class="text-center text-muted mt-5 mb-0">
+                                        <fmt:message key="sign_up.already.login" />
+                                        <a href="#" class="fw-bold text-body">
+                                            <u>
+                                                <fmt:message key="sign_up.login.here" />
+                                            </u>
+                                        </a>
+                                    </p>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                     class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-xl btn-warning"><fmt:message key="sign.up"/></button>
-
-    </form>
-
-    <p class="fs-6 col-md-8">
-        <fmt:message key="have.account"/>
-        <a href="signIn.jsp" class="link-dark"><fmt:message key="log.in"/></a>
-    </p>
-</div>
+    </div>
+</section>
 
 <jsp:include page="includes/footer.jsp"/>
 

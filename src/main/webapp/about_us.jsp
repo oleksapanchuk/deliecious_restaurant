@@ -8,14 +8,18 @@
 <html lang="en">
 <head>
     <%@include file="includes/head.jsp" %>
-    <title><fmt:message key="log.in"/></title>
+    <title><fmt:message key="about_us"/></title>
 </head>
 
 <body>
 
 <jsp:include page="includes/header.jsp"/>
 
-
+<div class="container min-size-2">
+    <h1 class="pt-5 text-center text-danger">
+        <fmt:message key="about_us"/>
+    </h1>
+</div>
 
 
 <jsp:include page="includes/footer.jsp"/>

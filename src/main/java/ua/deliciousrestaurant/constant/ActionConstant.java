@@ -4,7 +4,7 @@ public final class ActionConstant {
 
     /* ACTION */
     public static final String ACTION_DEFAULT = "default";
-    public static final String ACTION_LOGIN = "log_in";
+    public static final String ACTION_LOGIN = "log-in";
     public static final String ACTION_SIGN_UP = "sign-up";
     public static final String ACTION_LOGOUT = "log_out";
     public static final String ACTION_ADD_TO_CART = "atc";

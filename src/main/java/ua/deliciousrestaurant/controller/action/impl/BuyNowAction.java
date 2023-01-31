@@ -6,7 +6,6 @@ import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.dao.DaoFactory;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.entity.Cart;
-import ua.deliciousrestaurant.model.entity.Client;
 import ua.deliciousrestaurant.model.entity.Order;
 import ua.deliciousrestaurant.model.entity.Product;
 import ua.deliciousrestaurant.service.ServiceFactory;
@@ -21,7 +20,7 @@ import java.util.List;
 import static ua.deliciousrestaurant.constant.ActionConstant.LOGIN_PAGE;
 import static ua.deliciousrestaurant.constant.ActionConstant.ORDERS_PAGE;
 
-public class OrderNowAction implements Action {
+public class BuyNowAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 
