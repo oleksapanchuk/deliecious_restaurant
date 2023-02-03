@@ -15,9 +15,12 @@ header {
     padding: 50px 0;
 }
 
-header,
-footer {
-    background-color: var(--color3);
+.footer-class {
+    background-color: #fff;
+    border-style: solid;
+    border-top: 10px #0c97ff;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
 }
 
 .section-style {
@@ -65,14 +68,15 @@ footer {
 
 
 .font-logo-text {
-    color: var(--color4);
+    color: var(--color3);
     font-family: "Sofia", sans-serif;
-    font-size: 30px;
+    font-size: 23px;
+    font-weight: bold;
     text-shadow: 3px 3px 3px, var(--color2);
 }
 
 .font-logo-text:hover {
-    color: var(--bs-white);
+    color: var(--color1);
 }
 
 
@@ -200,5 +204,21 @@ footer {
     font-weight: 700;
 }
 
+a {
+    font-size:14px;
+    font-weight:700
+}
+.superNav {
+    font-size:13px;
+}
+.form-control {
+    outline:none !important;
+    box-shadow: none !important;
+}
+@media screen and (max-width:540px){
+    .centerOnMobile {
+        text-align:center
+    }
+}
 
 
