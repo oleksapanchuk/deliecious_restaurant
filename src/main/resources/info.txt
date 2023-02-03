@@ -1,0 +1,12 @@
+
+
+
+ORDER STATUS:
+    '-1' - all orders
+    '0' - canceled
+    '1' - ordered
+    '2' - preparing
+    '3' - delivering
+    '4' - delivered
+    '5' - paid
+

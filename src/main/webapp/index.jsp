@@ -6,7 +6,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${sessionScope.locale}">
 <head>
     <%@include file="includes/head.jsp" %>
     <title>Delicious Restaurant</title>
@@ -16,9 +16,21 @@
 
 <jsp:include page="includes/header.jsp"/>
 
-<div class="container min-size-2">
-
-</div>
+<section class="vh-200" style="background-color: #eee; padding: 0 0;">
+    <div class="masthead">
+        <div class="container">
+            <div class="masthead-subheading">
+                Welcome To Our Restaurant!
+            </div>
+            <div class="masthead-heading text-uppercase" style="-webkit-text-stroke-width: 2px; -webkit-text-stroke-color: darkred;">
+                Delicious Restaurant
+            </div>
+            <a class="btn btn-danger btn-xl text-uppercase" href="controller?action=view-menu&sort_field=p.category_id&sort_order=asc&category_filter_id=0&offset=0&records=8&cur_page=1">
+                <fmt:message key="menu"/>
+            </a>
+        </div>
+    </div>
+</section>
 
 <jsp:include page="includes/footer.jsp"/>
 

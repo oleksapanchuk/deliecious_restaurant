@@ -1,6 +1,7 @@
 package ua.deliciousrestaurant.model.dao.mysql;
 
 
+import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.entity.Client;
 import ua.deliciousrestaurant.constant.DBConstant;
 import ua.deliciousrestaurant.model.dao.ClientDAO;
@@ -12,9 +13,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static ua.deliciousrestaurant.constant.DBConstant.GET_ALL_CLIENTS;
 import static ua.deliciousrestaurant.constant.DBConstant.INSERT_CLIENT;
 
 public class ClientDAOImpl implements ClientDAO {
@@ -87,6 +91,33 @@ public class ClientDAOImpl implements ClientDAO {
             DataSource.close(Objects.requireNonNull(con));
         }
         return false;
+    }
+
+    @Override
+    public List<ClientDTO> getAllClients() throws DaoException {
+        List<ClientDTO> clientsDTOList = new ArrayList<>();
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(GET_ALL_CLIENTS)) {
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    clientsDTOList.add(ClientDTO.builder()
+                            .clientId(rs.getInt(1))
+                            .role((rs.getInt(2) == 1 ? Role.CLIENT : Role.MANAGER))
+                            .email(rs.getString(3))
+                            .firstName(rs.getString(5))
+                            .lastName(rs.getString(6))
+                            .build());
+                }
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return clientsDTOList;
     }
 
     @Override

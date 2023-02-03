@@ -9,10 +9,16 @@ import ua.deliciousrestaurant.service.ClientService;
 import ua.deliciousrestaurant.utils.ConvertorUtil;
 import ua.deliciousrestaurant.utils.PasswordCode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ClientServiceImpl implements ClientService {
 
+    @Override
+    public List<ClientDTO> getAllClients() throws DaoException {
+        return DaoFactory.getInstance().getClientDAO().getAllClients();
+    }
     @Override
     public ClientDTO login(String email, String password) throws ServiceException {
         ClientDTO clientDTO;

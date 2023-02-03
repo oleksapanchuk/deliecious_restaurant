@@ -12,6 +12,8 @@ public interface OrderDAO {
     boolean insertOrder(Order order) throws DaoException;
 
     List<Order> getClientOrders(int id) throws DaoException;
+    List<Order> getOrderByQuery(String query) throws DaoException;
+    int getNumberRecordsByQuery(String query) throws DaoException;
 
     List<Cart> getProductsFromOrder(int orderId) throws DaoException;
 

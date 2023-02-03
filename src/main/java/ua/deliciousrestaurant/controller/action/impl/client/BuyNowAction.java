@@ -1,4 +1,4 @@
-package ua.deliciousrestaurant.controller.action.impl;
+package ua.deliciousrestaurant.controller.action.impl.client;
 
 import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.DaoException;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static ua.deliciousrestaurant.constant.ActionConstant.HREF_ORDER_PAGE;
 import static ua.deliciousrestaurant.constant.ActionConstant.LOGIN_PAGE;
-import static ua.deliciousrestaurant.constant.ActionConstant.ORDERS_PAGE;
 
 public class BuyNowAction implements Action {
     @Override
@@ -56,7 +56,7 @@ public class BuyNowAction implements Action {
                             }
                         }
                     }
-                    return ORDERS_PAGE;
+                    return HREF_ORDER_PAGE;
                 } else {
                     throw new ServiceException();
                 }

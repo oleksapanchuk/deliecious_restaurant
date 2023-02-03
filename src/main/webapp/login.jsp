@@ -37,7 +37,7 @@
                                         <input type="hidden" name="action" value="log-in">
 
                                         <div class="d-flex align-items-center mb-3 pb-1">
-                                            <i class="fa-solid fa-pot-food fa-lg me-3 fa-fw  mb-4"></i>
+                                            <img id="logo" src="img/logo_red.png" alt="logo there"/>
                                             <span class="h1 fw-bold mb-0">
                                                 Delicious Restaurant
                                             </span>
@@ -62,7 +62,7 @@
                                         </div>
 
                                         <div class="pt-1 mb-4">
-                                            <button type="submit" class="btn btn-dark btn-lg btn-block" type="button">
+                                            <button type="submit" class="btn btn-danger btn-lg btn-block" type="button">
                                                 <fmt:message key="log.in" />
                                             </button>
                                         </div>

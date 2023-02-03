@@ -11,12 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static ua.deliciousrestaurant.constant.DBConstant.GET_PRODUCT_BY_ID;
-import static ua.deliciousrestaurant.constant.DBConstant.GET_TOTAL_PRICE;
+import static ua.deliciousrestaurant.constant.DBConstant.*;
 
 public class ProductDAOImpl implements ProductDAO {
 
@@ -29,7 +26,6 @@ public class ProductDAOImpl implements ProductDAO {
              PreparedStatement ps = con.prepareStatement(query)) {
             System.out.println(query);
             ps.executeQuery();
-
 
 
             try (ResultSet rs = ps.getResultSet()) {
@@ -95,6 +91,28 @@ public class ProductDAOImpl implements ProductDAO {
         }
 
         return totalPrice;
+    }
+
+    @Override
+    public Map<Integer, String> getMapCategories(String locale) throws DaoException {
+        Map<Integer, String> mapCategories = new HashMap<>();
+
+        String query = locale.equals("en") ? GET_ALL_CATEGORIES_ENG :GET_ALL_CATEGORIES_UA;
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            try (ResultSet rs = pst.executeQuery()){
+                while (rs.next()) {
+                    mapCategories.put(rs.getInt(1), rs.getString(2));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return mapCategories;
     }
 
 

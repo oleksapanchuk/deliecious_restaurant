@@ -62,7 +62,7 @@ public class OrderDAOImpl implements OrderDAO {
 
         try (Connection con = DataSource.getConnection();
              PreparedStatement pst = con.prepareStatement(GET_CLIENT_ORDERS)) {
-;
+            ;
             pst.setInt(1, id);
 
             try (ResultSet rs = pst.executeQuery()) {
@@ -83,6 +83,51 @@ public class OrderDAOImpl implements OrderDAO {
         }
 
         return orders;
+    }
+
+    @Override
+    public List<Order> getOrderByQuery(String query) throws DaoException {
+        List<Order> orderList = new ArrayList<>();
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    orderList.add(Order.builder()
+                            .orderId(rs.getInt(1))
+                            .clientId(rs.getInt(2))
+                            .statusId(rs.getInt(3))
+                            .addressDelivery(rs.getString(4))
+                            .isOrderLiked(rs.getInt(5) == 1)
+                            .date(rs.getString(7))
+                            .build());
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+
+        return orderList;
+    }
+
+    @Override
+    public int getNumberRecordsByQuery(String query) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return 0;
     }
 
     @Override

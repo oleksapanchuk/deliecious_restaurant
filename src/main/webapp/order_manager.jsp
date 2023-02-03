@@ -8,9 +8,8 @@
 <html lang="${sessionScope.locale}">
 <head>
     <%@include file="includes/head.jsp" %>
-    <title><fmt:message key="orders"/></title>
+    <title><fmt:message key="mng.orders"/></title>
 </head>
-
 <body>
 
 <jsp:include page="includes/header.jsp"/>
@@ -18,7 +17,6 @@
 <section class="vh-200 section-style">
     <div class="container h-100 container-style" style="min-height: 400px;">
         <div class="row my-2">
-
             <table class="table">
                 <thead>
                 <tr>
@@ -36,7 +34,7 @@
                     <tr>
                         <td class="text-center"><c:out value="${ order.getOrderId() }"/></td>
                         <td><c:out value="${ order.getDate() }"/></td>
-                        <td class="text-center"><c:out value="${ order.getOrderTotalPrice() }"/> <fmt:message key="currency"/></td>
+                        <td><c:out value="${ order.getOrderTotalPrice() }"/> <fmt:message key="currency"/></td>
                         <td class="text-center">
                             <c:choose>
 
@@ -79,22 +77,19 @@
 
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-warning" href="#">
-                                <fmt:message key="order.show.more"/>
-                            </a>
+                            <a class="btn btn-warning" href="#"><fmt:message key="order.show.more"/></a>
                         </td>
                         <td class="text-center">
                             <c:choose>
                                 <c:when test="${ order.isOrderLiked() }">
                                     <a class="btn btn-danger"
-                                       href="controller?action=set-like-for-order&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&client_id_filter=${ sessionScope.client_id_filter }&order_status=${ sessionScope.order_status }&offset=${ requestScope.offset }&records=8&cur_page=${ requestScope.cur_page }&order-id=${ order.getOrderId() }&is-liked-order=true"
-                                    >
+                                       href="controller?action=set-like-for-order&order-id=${ order.getOrderId() }&is-liked-order=true">
                                         <i class="fa-solid fa-heart"></i>
                                     </a>
                                 </c:when>
                                 <c:otherwise>
                                     <a class="btn btn-secondary"
-                                       href="controller?action=set-like-for-order&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&client_id_filter=${ sessionScope.client_id_filter }&order_status=${ sessionScope.order_status }&offset=${ requestScope.offset }&records=8&cur_page=${ requestScope.cur_page }&order-id=${ order.getOrderId() }&is-liked-order=false">
+                                       href="controller?action=set-like-for-order&order-id=${ order.getOrderId() }&is-liked-order=false">
                                         <i class="fa-regular fa-heart"></i>
                                     </a>
                                 </c:otherwise>
@@ -105,13 +100,13 @@
 
                 </tbody>
             </table>
-
         </div>
     </div>
 </section>
 
+
 <c:set var="href" scope="request"
-       value="controller?action=view-orders-for-user&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&client_id_filter=${ sessionScope.client_id_filter }&order_status=${ sessionScope.order_status }&"/>
+       value="controller?action=view-orders-for-managers&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&client_id_filter=${ sessionScope.client_id_filter }&order_status=${ sessionScope.order_status }&"/>
 <jsp:include page="includes/pagination.jsp"/>
 
 <jsp:include page="includes/footer.jsp"/>

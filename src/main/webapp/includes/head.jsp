@@ -14,3 +14,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+
+<%-- Sweet Alert --%>
+<script src="https://unpkg.com/sweetalert/js/sweetalert.min.js"></script>
+<link rel="stylesheet" href="alert/dist/sweetalert.css">

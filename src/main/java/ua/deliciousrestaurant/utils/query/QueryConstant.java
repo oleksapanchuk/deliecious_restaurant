@@ -16,8 +16,10 @@ public class QueryConstant {
     /* SELECT */
     public static final String SELECT_CLIENT = "SELECT * FROM `client` ";
     public static final String SELECT_ORDER = "SELECT * FROM `order` ";
-    public static final String SELECT_PRODUCT = "SELECT p.prod_id, p.prod_ua_name, c.category_ua_name, p.prod_cost, p.prod_weight, p.prod_img, p.category_id FROM `product` p JOIN `category` c ON p.category_id = c.category_id ";
+    public static final String SELECT_PRODUCT_UA = "SELECT p.prod_id, p.prod_ua_name, c.category_ua_name, p.prod_cost, p.prod_weight, p.prod_img, p.category_id FROM `product` p JOIN `category` c ON p.category_id = c.category_id ";
+    public static final String SELECT_PRODUCT_ENG = "SELECT p.prod_id, p.prod_eng_name, c.category_eng_name, p.prod_cost, p.prod_weight, p.prod_img, p.category_id FROM `product` p JOIN `category` c ON p.category_id = c.category_id ";
     public static final String SELECT_PRODUCT_NUMBER = "SELECT count(*) as total FROM `product` p JOIN `category` c ON p.category_id = c.category_id ";
+    public static final String SELECT_ORDER_NUMBER = "SELECT count(*) as total FROM `order`";
 
 
     /* FIELDS */

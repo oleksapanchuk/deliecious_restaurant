@@ -1,4 +1,4 @@
-package ua.deliciousrestaurant.controller.action.impl;
+package ua.deliciousrestaurant.controller.action.impl.user;
 
 import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.ServiceException;

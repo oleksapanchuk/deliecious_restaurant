@@ -2,10 +2,12 @@ package ua.deliciousrestaurant.service.impl;
 
 import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
+import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.dao.DaoFactory;
 import ua.deliciousrestaurant.model.entity.Order;
 import ua.deliciousrestaurant.service.OrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
@@ -26,6 +28,30 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orders;
+    }
+
+    @Override
+    public List<Order> getOrderByQuery(String query) throws ServiceException {
+        List<Order> orderList;
+
+        try {
+            orderList = DaoFactory.getInstance().getOrderDAO().getOrderByQuery(query);
+
+            for (Order order : orderList) {
+                order.setOrderProducts(DaoFactory.getInstance().getOrderDAO().getProductsFromOrder(order.getOrderId()));
+                order.setOrderTotalPrice(DaoFactory.getInstance().getProductDAO().getTotalCartPrice(order.getOrderProducts()));
+            }
+
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+
+        return orderList;
+    }
+
+    @Override
+    public int getNumberOrdersByQuery(String query) throws ServiceException, DaoException {
+        return DaoFactory.getInstance().getOrderDAO().getNumberRecordsByQuery(query);
     }
 
     @Override

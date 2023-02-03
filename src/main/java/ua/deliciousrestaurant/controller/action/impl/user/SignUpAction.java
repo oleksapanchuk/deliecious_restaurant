@@ -1,4 +1,4 @@
-package ua.deliciousrestaurant.controller.action.impl;
+package ua.deliciousrestaurant.controller.action.impl.user;
 
 import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.DaoException;
@@ -25,6 +25,7 @@ public class SignUpAction implements Action {
         String lastName = request.getParameter(REG_LAST_NAME);
         String address = request.getParameter(REG_ADDRESS);
 
+
         Client client = Client.builder()
                 .email(email)
                 .password(PasswordCode.encodePassword(password).get())
@@ -39,6 +40,8 @@ public class SignUpAction implements Action {
             client.setClientId(DaoFactory.getInstance().getClientDAO().addClient(client));
 
             ClientDTO clientDTO = ConvertorUtil.convertUserToDTO(client);
+
+            System.out.println(clientDTO);
 
             setLoggedUser(request, clientDTO);
 

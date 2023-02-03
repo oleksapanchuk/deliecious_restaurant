@@ -20,6 +20,15 @@ footer {
     background-color: var(--color3);
 }
 
+.section-style {
+    background-color: #eee;
+}
+
+.container-style {
+    border-radius: 10px;
+    background-color: #fff;
+}
+
 .min-size-1 {
     min-height: 430px;
 }
@@ -76,6 +85,10 @@ footer {
     color: var(--color3);
     box-shadow: none;
     font-size: 25px;
+}
+
+.btn-incre:hover, .btn-decre:hover {
+    color: var(--color1);
 }
 
 .menu-item {
@@ -160,7 +173,7 @@ footer {
     text-align: center;
     color: #fff;
     /*background-image: url("https://media.timeout.com/images/105851927/image.jpg");*/
-    background-image: url("https://media.timeout.com/images/105851927/image.jpg");
+    background-image: url("https://media.cntraveler.com/photos/610da075d713cfe783511976/16:9/w_2560,c_limit/The%20Black%20Sheep,%20Las%20Vega%20_Interior.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

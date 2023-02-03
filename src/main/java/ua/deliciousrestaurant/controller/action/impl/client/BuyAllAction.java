@@ -1,4 +1,4 @@
-package ua.deliciousrestaurant.controller.action.impl;
+package ua.deliciousrestaurant.controller.action.impl.client;
 
 import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.DaoException;
@@ -40,7 +40,7 @@ public class BuyAllAction implements Action {
 
                 if (DaoFactory.getInstance().getOrderDAO().insertOrder(order)) {
                     products.clear();
-                    return ORDERS_PAGE;
+                    return HREF_ORDER_PAGE;
                 } else {
                     //todo
                     System.out.println("order failed");

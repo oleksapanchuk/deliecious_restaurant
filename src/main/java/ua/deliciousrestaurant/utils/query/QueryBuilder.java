@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import static ua.deliciousrestaurant.utils.query.QueryConstant.*;
+import static ua.deliciousrestaurant.utils.query.QueryConstant.ASCENDING_ORDER;
+import static ua.deliciousrestaurant.utils.query.QueryConstant.DESCENDING_ORDER;
 
 public class QueryBuilder {
     private final List<String> filters = new ArrayList<>();
@@ -13,8 +14,7 @@ public class QueryBuilder {
     private int offset = 0;
     private int records = 5;
 
-    public QueryBuilder(String sortField) {
-        this.sortField = sortField;
+    public QueryBuilder() {
     }
 
 
@@ -25,6 +25,16 @@ public class QueryBuilder {
 
     public QueryBuilder setProductCategoryFilter(int categoryId) {
         filters.add("p.category_id=" + categoryId);
+        return this;
+    }
+
+    public QueryBuilder setOrderStatusFilter(int orderStatusId) {
+        filters.add("status_id=" + orderStatusId);
+        return this;
+    }
+
+    public QueryBuilder setFindTextFilter(String field, String findText) {
+        filters.add(field + " LIKE \"" + findText + "%\"");
         return this;
     }
 
@@ -53,10 +63,10 @@ public class QueryBuilder {
     }
 
 
-
     public String getQuery() {
         return getFilterQuery() + getSortQuery() + getLimitQuery();
     }
+
     public String getQueryNoLimits() {
         return getFilterQuery() + getSortQuery();
     }

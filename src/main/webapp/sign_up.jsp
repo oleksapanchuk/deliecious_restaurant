@@ -5,7 +5,7 @@
 <fmt:setBundle basename="resources"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${sessionScope.locale}">
 <head>
     <%@include file="includes/head.jsp" %>
     <title><fmt:message key="sign.up"/></title>
@@ -26,13 +26,13 @@
 
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"><fmt:message key="sign.up"/></p>
 
-                                <form method="post" class="mx-1 mx-md-4">
+                                <form method="post" action="controller" class="mx-1 mx-md-4">
                                     <input type="hidden" name="action" value="sign-up">
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fa-regular fa-user fa-lg me-3 fa-fw  mb-4"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="inputFirstName" class="form-control" />
+                                            <input type="text" id="inputFirstName" name="fname" class="form-control" />
                                             <label class="form-label" for="inputFirstName"><fmt:message key="first.name"/></label>
                                         </div>
                                     </div>
@@ -40,7 +40,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw mb-4"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="text" id="inputLastName" class="form-control" />
+                                            <input type="text" id="inputLastName" name="lname" class="form-control" />
                                             <label class="form-label" for="inputLastName"><fmt:message key="last.name"/></label>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw  mb-4"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="email" id="inputEmail" class="form-control" />
+                                            <input type="email" id="inputEmail" name="email" class="form-control" />
                                             <label class="form-label" for="inputEmail"><fmt:message key="email.address"/></label>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw  mb-4"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="inputPassword" class="form-control" />
+                                            <input type="password" id="inputPassword" name="pass" class="form-control" />
                                             <label class="form-label" for="inputPassword"><fmt:message key="password"/></label>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-key fa-lg me-3 fa-fw  mb-4"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="inputPasswordAgain" class="form-control" />
+                                            <input type="password" id="inputPasswordAgain" name="pass-again" class="form-control" />
                                             <label class="form-label" for="inputPasswordAgain"><fmt:message key="sing_up.repeat.pass" /></label>
                                         </div>
                                     </div>
@@ -72,19 +72,19 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fa-solid fa-location-pin fa-lg me-3 fa-fw  mb-4"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input type="password" id="inputAddress" class="form-control" />
+                                            <input type="password" id="inputAddress" name="address" class="form-control" />
                                             <label class="form-label" for="inputAddress"><fmt:message key="address" /></label>
                                         </div>
                                     </div>
 
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="button" class="btn btn-primary btn-lg">Register</button>
+                                        <button type="submit" class="btn btn-danger btn-lg"><fmt:message key="sign.up"/></button>
                                     </div>
 
                                     <p class="text-center text-muted mt-5 mb-0">
                                         <fmt:message key="sign_up.already.login" />
-                                        <a href="#" class="fw-bold text-body">
+                                        <a href="login.jsp" class="fw-bold text-body">
                                             <u>
                                                 <fmt:message key="sign_up.login.here" />
                                             </u>

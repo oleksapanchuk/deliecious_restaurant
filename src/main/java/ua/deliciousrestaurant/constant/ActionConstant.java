@@ -16,17 +16,23 @@ public final class ActionConstant {
     public static final String ACTION_VIEW_CART = "view-cart";
     public static final String ACTION_VIEW_ORDERS_FOR_USER = "view-orders-for-user";
     public static final String ACTION_SET_LIKE_FOR_ORDER = "set-like-for-order";
+    public static final String ACTION_VIEW_CLIENT_ACCOUNT = "view-client-account";
+    public static final String ACTION_VIEW_ALL_CLIENTS = "view-all-clients";
+    public static final String ACTION_VIEW_ORDERS_FOR_MANAGER = "view-orders-for-managers";
 
 
     /* PAGES */
+    public static final String HREF_ORDER_PAGE = "controller?action=view-orders-for-managers&sort_field=order_id&sort_order=des&client_id_filter=0&order_status=-1&offset=0&records=8&cur_page=1";
+
     public static final String CONTROLLER_PAGE = "controller";
     public static final String INDEX_PAGE = "index.jsp";
     public static final String MENU_PAGE = "menu.jsp";
     public static final String CART_PAGE = "controller?action="  + ACTION_VIEW_CART;
     public static final String CART_PAGE_JSP = "cart.jsp";
-    public static final String ORDERS_PAGE = "controller?action=" + ACTION_VIEW_ORDERS_FOR_USER;
     public static final String ORDERS_PAGE_JSP = "orders.jsp";
-
+    public static final String CLIENT_PAGE = "client_account.jsp";
+    public static final String CLIENTS_PAGE = "client_manager.jsp";
+    public static final String MNG_ORDER_PAGE = "order_manager.jsp";
     public static final String LOGIN_PAGE = "login.jsp";
     public static final String SIGN_UP_PAGE = "sign_up.jsp";
 
@@ -61,11 +67,14 @@ public final class ActionConstant {
     public static final String ORDER_LIST = "order_list";
 
 
-    public static final String SORT_FIELD = "sort-field";
-    public static final String SORT_ORDER = "sort-order";
-    public static final String CATEGORY_FILTER = "category-filter-id";
+    public static final String SORT_FIELD = "sort_field";
+    public static final String SORT_ORDER = "sort_order";
+    public static final String CATEGORY_FILTER = "category_filter_id";
     public static final String OFFSET = "offset";
     public static final String RECORDS = "records";
+    public static final String FIND_TEXT = "find_text";
+    public static final String ORDER_STATUS = "order_status";
+    public static final String CLIENT_ID_FILTER = "client_id_filter";
 
     public static final String TOTAL_PAGES = "total_pages";
     public static final String CURRENT_PAGE = "cur_page";
