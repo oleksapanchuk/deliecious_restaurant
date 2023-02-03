@@ -19,13 +19,13 @@
     <section class="vh-200" style="background-color: #eee;">
         <div class="container h-100 justify-content-center container-style">
             <p class="col-12 text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="padding: 50px 0;">
-                You have not selected anything yet!
+                <fmt:message key="cart.not.selected"/>
             </p>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" style="padding: 50px 0;">
-                <button type="button" class="btn btn-danger btn-lg"
+                <a type="button" class="btn btn-danger btn-lg"
                         href="controller?action=view-menu&sort_field=p.category_id&sort_order=asc&category_filter_id=0&offset=0&records=8&cur_page=1">
                     <fmt:message key="menu"/>
-                </button>
+                </a>
             </div>
         </div>
     </section>

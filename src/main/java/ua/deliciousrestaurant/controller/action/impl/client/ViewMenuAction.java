@@ -26,6 +26,7 @@ public class ViewMenuAction implements Action {
        int categoryFilter = Integer.parseInt(request.getParameter(CATEGORY_FILTER));
        int offset = Integer.parseInt(request.getParameter(OFFSET));
        int records = Integer.parseInt(request.getParameter(RECORDS));
+       String searchedText = request.getParameter(SEARCH_FIELD);
        String locale = (String) request.getSession().getAttribute(LOCALE);
 
        QueryBuilder queryBuilder = new QueryBuilder()
@@ -38,6 +39,16 @@ public class ViewMenuAction implements Action {
            queryBuilder.setProductCategoryFilter(categoryFilter);
        }
 
+        if (searchedText != null) {
+            if (!searchedText.equals("") && !searchedText.equals("NoNe")) {
+                if (locale == null || locale.equals("en")) {
+                    queryBuilder.setFindTextFilter(" prod_eng_name ", searchedText);
+                } else {
+                    queryBuilder.setFindTextFilter(" prod_ua_name ", searchedText);
+                }
+            }
+        }
+
         try {
             List<ProductDTO> products = ServiceFactory.getInstance().getProductService().getAllProducts(request, queryBuilder.getQuery());
             int numberOfProducts = ServiceFactory.getInstance().getProductService().getNumberOfProducts(SELECT_PRODUCT_NUMBER + queryBuilder.getQueryNoLimits());
@@ -48,6 +59,7 @@ public class ViewMenuAction implements Action {
 
             request.getSession().setAttribute(SORT_FIELD, sortField);
             request.getSession().setAttribute(SORT_ORDER, sortOrder);
+            request.getSession().setAttribute(SEARCH_FIELD, searchedText);
             request.getSession().setAttribute(CATEGORY_FILTER, categoryFilter);
 
             paginate(request, numberOfProducts);

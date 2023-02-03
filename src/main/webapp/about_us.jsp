@@ -15,12 +15,19 @@
 
 <jsp:include page="includes/header.jsp"/>
 
-<div class="container min-size-2">
-    <h1 class="pt-5 text-center text-danger">
-        <fmt:message key="about_us"/>
-    </h1>
-</div>
-
+<section class="vh-200" style="background-color: #eee;">
+    <div class="container h-100 justify-content-center container-style">
+        <p class="col-12 text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="padding: 50px 0;">
+            <fmt:message key="about_us"/>
+        </p>
+        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" style="padding: 50px 0;">
+            <a type="button" class="btn btn-danger btn-lg"
+               href="#">
+                Oleksandr Panchuk
+            </a>
+        </div>
+    </div>
+</section>
 
 <jsp:include page="includes/footer.jsp"/>
 
