@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface OrderDAO {
 
     boolean insertOrder(Order order) throws DaoException;
+    boolean updateStatusOrder(int status, int order) throws DaoException;
 
     List<Order> getClientOrders(int id) throws DaoException;
     List<Order> getOrderByQuery(String query) throws DaoException;

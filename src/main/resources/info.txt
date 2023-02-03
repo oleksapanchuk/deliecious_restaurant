@@ -8,5 +8,4 @@ ORDER STATUS:
     '2' - preparing
     '3' - delivering
     '4' - delivered
-    '5' - paid
 

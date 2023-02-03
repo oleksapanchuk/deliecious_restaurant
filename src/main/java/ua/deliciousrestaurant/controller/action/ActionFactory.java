@@ -1,6 +1,7 @@
 package ua.deliciousrestaurant.controller.action;
 
 import ua.deliciousrestaurant.controller.action.impl.client.*;
+import ua.deliciousrestaurant.controller.action.impl.manager.ChangeStatusAction;
 import ua.deliciousrestaurant.controller.action.impl.manager.ViewClientsAction;
 import ua.deliciousrestaurant.controller.action.impl.manager.ViewOrdersForManagerAction;
 import ua.deliciousrestaurant.controller.action.impl.user.*;
@@ -37,6 +38,7 @@ public final class ActionFactory {
             actionMap.put(ACTION_VIEW_CLIENT_ACCOUNT, new ViewClientAccountAction());
             actionMap.put(ACTION_VIEW_ALL_CLIENTS, new ViewClientsAction());
             actionMap.put(ACTION_VIEW_ORDERS_FOR_MANAGER, new ViewOrdersForManagerAction());
+            actionMap.put(ACTION_CHANGE_ORDER_STATUS, new ChangeStatusAction());
 
 
         }

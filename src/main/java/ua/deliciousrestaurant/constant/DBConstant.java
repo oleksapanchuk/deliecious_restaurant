@@ -26,6 +26,7 @@ public class DBConstant {
     public static final String GET_CLIENT_ORDERS = "SELECT * FROM `order` WHERE client_id = ?";
     public static final String GET_PRODUCTS_FROM_ORDER = "SELECT * FROM `order_has_product` WHERE order_id = ?";
     public static final String UPDATE_LIKED_STATUS_ORDER = "UPDATE `order` SET order_liked = ? WHERE order_id = ?";
+    public static final String UPDATE_ORDER_STATUS = "UPDATE `order` SET status_id = ? WHERE order_id = ?";
 
 
 }

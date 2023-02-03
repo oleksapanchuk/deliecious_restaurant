@@ -25,10 +25,13 @@ public class ViewOrdersForManagerAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String sortField = request.getParameter(SORT_FIELD);
         String sortOrder = request.getParameter(SORT_ORDER);
-        int clientIdFilter = Integer.parseInt(request.getParameter(CLIENT_ID_FILTER));
+        int clientIdFilter = ((ClientDTO) request.getSession().getAttribute(AUTH)).getClientId();
         int orderStatus = Integer.parseInt(request.getParameter(ORDER_STATUS));
         int offset = Integer.parseInt(request.getParameter(OFFSET));
         int records = Integer.parseInt(request.getParameter(RECORDS));
+        String searchInfo = request.getParameter(SEARCH_FIELD);
+
+        System.out.println(request.getHeader("referer"));
 
         QueryBuilder queryBuilder = new QueryBuilder()
                 .setSortField(sortField)
@@ -40,8 +43,10 @@ public class ViewOrdersForManagerAction implements Action {
             queryBuilder.setOrderStatusFilter(orderStatus);
         }
 
-        if (clientIdFilter > 0 ) {
-            queryBuilder.setClientIdFilter(clientIdFilter);
+        if (searchInfo != null) {
+            if (!searchInfo.equals("") && !searchInfo.equals("NoNe")) {
+                queryBuilder.setFindTextFilter(" order_id ", searchInfo);
+            }
         }
 
         try {
@@ -56,6 +61,9 @@ public class ViewOrdersForManagerAction implements Action {
             request.getSession().setAttribute(SORT_ORDER, sortOrder);
             request.getSession().setAttribute(CLIENT_ID_FILTER, clientIdFilter);
             request.getSession().setAttribute(ORDER_STATUS, orderStatus);
+            request.getSession().setAttribute(SEARCH_FIELD, searchInfo);
+            request.getSession().setAttribute(OFFSET, offset);
+            request.getSession().setAttribute(RECORDS, records);
 
             paginate(request, numberOfProducts);
 

@@ -56,13 +56,34 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
+    public boolean updateStatusOrder(int status, int order) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement pst = con.prepareStatement(UPDATE_ORDER_STATUS)) {
+
+            pst.setInt(1, status);
+            pst.setInt(2, order);
+
+            if (pst.executeUpdate() == 1) {
+                return true;
+            } else {
+                throw new DaoException("Status can't be changed");
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+
+    }
+
+    @Override
     public List<Order> getClientOrders(int id) throws DaoException {
 
         List<Order> orders = new ArrayList<>();
 
         try (Connection con = DataSource.getConnection();
              PreparedStatement pst = con.prepareStatement(GET_CLIENT_ORDERS)) {
-            ;
+
             pst.setInt(1, id);
 
             try (ResultSet rs = pst.executeQuery()) {

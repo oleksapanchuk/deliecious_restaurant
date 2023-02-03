@@ -64,7 +64,10 @@ public class QueryBuilder {
 
 
     public String getQuery() {
-        return getFilterQuery() + getSortQuery() + getLimitQuery();
+        String  str = getFilterQuery() + getSortQuery() + getLimitQuery();
+        System.out.println(str);
+        return str;
+//        return getFilterQuery() + getSortQuery() + getLimitQuery(); //todo
     }
 
     public String getQueryNoLimits() {

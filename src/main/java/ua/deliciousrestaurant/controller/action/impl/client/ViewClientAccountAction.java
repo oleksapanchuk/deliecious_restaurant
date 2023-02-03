@@ -6,11 +6,11 @@ import ua.deliciousrestaurant.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static ua.deliciousrestaurant.constant.ActionConstant.CLIENT_PAGE;
+import static ua.deliciousrestaurant.constant.ActionConstant.ACCOUNT_PAGE;
 
 public class ViewClientAccountAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        return CLIENT_PAGE;
+        return ACCOUNT_PAGE;
     }
 }

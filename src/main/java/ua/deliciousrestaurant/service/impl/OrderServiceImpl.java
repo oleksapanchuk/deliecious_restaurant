@@ -55,6 +55,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public boolean setOrderStatus(int status, int orderId) throws ServiceException {
+        try {
+            return DaoFactory.getInstance().getOrderDAO().updateStatusOrder(status, orderId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public boolean setLikeDislike(int orderId, String isLiked) throws DaoException {
         return DaoFactory.getInstance().getOrderDAO().updateLikedStatus(orderId, isLiked.equals("true") ? 0 : 1);
     }

@@ -2,6 +2,7 @@ package ua.deliciousrestaurant.utils;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import ua.deliciousrestaurant.exception.se.WrongPasswordException;
 
 import java.util.Optional;
 

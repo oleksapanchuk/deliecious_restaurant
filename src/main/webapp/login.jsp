@@ -48,14 +48,14 @@
                                         </h5>
 
                                         <div class="form-outline mb-4">
-                                            <input type="email" id="inputLogin" name="login-email" class="form-control form-control-lg" />
+                                            <input type="email" id="inputLogin" name="login_email" class="form-control form-control-lg" />
                                             <label class="form-label" for="inputLogin">
                                                 <fmt:message key="email.address" />
                                             </label>
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="password" id="inputPassword" name="login-password" class="form-control form-control-lg" />
+                                            <input type="password" id="inputPassword" name="login_password" class="form-control form-control-lg" />
                                             <label class="form-label" for="inputPassword">
                                                 <fmt:message key="password" />
                                             </label>
@@ -89,6 +89,19 @@
     </section>
 
     <jsp:include page="includes/footer.jsp"/>
+
+    <c:set var="error_status" scope="request" value="error"/>
+    <input type="hidden" id="error_status" value="${ requestScope.error_status }">
+
+<script type="text/javascript">
+    var status = document.getElementById(status).value;
+    if (status === "success") {
+        swal("Congrats", "Account created", "success");
+    } else {
+        swal("Error", "Something went wrong!", "error");
+    }
+
+</script>
 
 </body>
 </html>
