@@ -21,4 +21,8 @@ public class ClientDTO implements Serializable {
     private String address;
     private String phoneNum;
     private Role role;
+    private int walletBalance;
+    private int totalOrders;
+    private int totalFundsSpent;
+    private boolean notification;
 }

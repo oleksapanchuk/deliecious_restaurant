@@ -1,13 +1,13 @@
 package ua.deliciousrestaurant.model.dao.mysql;
 
 
+import ua.deliciousrestaurant.constant.DBConstant;
+import ua.deliciousrestaurant.exception.DaoException;
+import ua.deliciousrestaurant.model.connection.DataSource;
+import ua.deliciousrestaurant.model.dao.ClientDAO;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.entity.Client;
-import ua.deliciousrestaurant.constant.DBConstant;
-import ua.deliciousrestaurant.model.dao.ClientDAO;
-import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.entity.Role;
-import ua.deliciousrestaurant.exception.DaoException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +22,7 @@ import static ua.deliciousrestaurant.constant.DBConstant.GET_ALL_CLIENTS;
 import static ua.deliciousrestaurant.constant.DBConstant.INSERT_CLIENT;
 
 public class ClientDAOImpl implements ClientDAO {
+
 
     @Override
     public int addClient(Client client) throws DaoException {
@@ -143,6 +144,106 @@ public class ClientDAOImpl implements ClientDAO {
             throw new DaoException(e);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public int getNumberOfOrder(int clientId) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(DBConstant.GET_CLIENT_TOTAL_ORDERS)) {
+
+            ps.setInt(1, clientId);
+
+            try (ResultSet rs = ps.executeQuery();) {
+                if (rs.next()) {
+                    return rs.getInt("total_orders");
+                }
+                throw new SQLException();
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int getTotalFundsSpent(int clientId) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(DBConstant.GET_CLIENT_TOTAL_FUNDS_SPENT)) {
+
+            ps.setInt(1, clientId);
+
+            try (ResultSet rs = ps.executeQuery();) {
+                if (rs.next()) {
+                    return rs.getInt("total_sum");
+                }
+                throw new SQLException();
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int getCurrentWalletBalance(int clientId) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(DBConstant.GET_CLIENT_CURRENT_BALANCE)) {
+
+            ps.setInt(1, clientId);
+
+            try (ResultSet rs = ps.executeQuery();) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                throw new SQLException();
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean addFundsToWallet(int clientId, int funds) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(DBConstant.UPDATE_CLIENT_WALLET)) {
+
+            ps.setInt(1, funds);
+            ps.setInt(2, clientId);
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                throw new DaoException();
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean updateNotificationState(int clientId, boolean isEnable) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(DBConstant.UPDATE_CLIENT_NOTIFICATION)) {
+
+            ps.setInt(1, isEnable ? 1 : 0);
+            ps.setInt(2, clientId);
+
+            if (ps.executeUpdate() > 0) {
+                return true;
+            } else {
+                throw new DaoException();
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     private Optional<Client> createClient(ResultSet rs) throws SQLException {

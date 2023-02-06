@@ -20,6 +20,7 @@ public final class ActionConstant {
     public static final String ACTION_VIEW_ALL_CLIENTS = "view-all-clients";
     public static final String ACTION_VIEW_ORDERS_FOR_MANAGER = "view-orders-for-managers";
     public static final String ACTION_CHANGE_ORDER_STATUS = "change_order_status";
+    public static final String ACTION_ADD_FUNDS = "add_funds";
 
 
     /* PAGES */
@@ -74,6 +75,8 @@ public final class ActionConstant {
     public static final String IS_LIKED_ORDER = "is-liked-order";
 
     public static final String ORDER_LIST = "order_list";
+    public static final String FUNDS = "funds";
+    public static final String VALID_STATUS = "valid_status";
 
 
 

@@ -22,7 +22,10 @@ public class LoginAction implements Action {
         String email = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);
 
-        System.out.println(email + " " + password);
+        if (email == null || email.equals("")) {
+            request.getSession().setAttribute("valid_status", "emptyEmail");
+            return LOGIN_PAGE;
+        }
 
         try {
             ClientDTO client = ServiceFactory.getInstance().getClientService().login(email, password);
@@ -33,6 +36,7 @@ public class LoginAction implements Action {
 
         } catch (NoSuchClientException | WrongPasswordException e) {
             request.getSession().setAttribute(ERROR, e.getMessage());
+            request.getSession().setAttribute("valid_status", e.getMessage());
             request.getSession().setAttribute(EMAIL, email);
         }
         return getActionToRedirect(ACTION_LOGIN);

@@ -39,6 +39,7 @@ public final class ActionFactory {
             actionMap.put(ACTION_VIEW_ALL_CLIENTS, new ViewClientsAction());
             actionMap.put(ACTION_VIEW_ORDERS_FOR_MANAGER, new ViewOrdersForManagerAction());
             actionMap.put(ACTION_CHANGE_ORDER_STATUS, new ChangeStatusAction());
+            actionMap.put(ACTION_ADD_FUNDS, new AddFundsAction());
 
 
         }

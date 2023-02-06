@@ -17,5 +17,5 @@
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 
 <%-- Sweet Alert --%>
-<script src="https://unpkg.com/sweetalert/js/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="alert/dist/sweetalert.css">

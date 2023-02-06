@@ -72,37 +72,47 @@
                                     <div class="row pt-1">
                                         <div class="col-4 mb-3">
                                             <h6><fmt:message key="account.balance"/></h6>
-                                            <p class="text-muted">100 <fmt:message key="currency"/></p>
+                                            <p class="text-muted">${ sessionScope.auth.getWalletBalance() } <fmt:message key="currency"/></p>
                                         </div>
                                         <div class="col-4 mb-3">
                                             <h6><fmt:message key="account.total.orders"/></h6>
-                                            <p class="text-muted">7</p>
+                                            <p class="text-muted">${ sessionScope.auth.getTotalOrders() }</p>
                                         </div>
                                         <div class="col-4 mb-3">
                                             <h6><fmt:message key="account.total.funds.spent"/></h6>
-                                            <p class="text-muted">777 <fmt:message key="currency"/></p>
+                                            <p class="text-muted">${ sessionScope.auth.getTotalFundsSpent() } <fmt:message key="currency"/></p>
                                         </div>
                                     </div>
                                 </c:if>
 
-                                <%-- logout button --%>
+                                <%-- buttons --%>
                                 <div class="row">
-                                    <div class="col-4 d-flex justify-content-start mt-4">
-                                        <a href="#"
-                                           class="nav-link mx-2 text-uppercase my-btn-red">
-                                            <i class="fa-solid fa-money-bill me-1"></i></i><fmt:message key="account.btn.add.funds"/>
-                                        </a>
-                                    </div>
+                                    <c:choose>
+                                        <c:when test="${ sessionScope.role == 'CLIENT' }">
+                                            <div class="col-4 d-flex justify-content-start mt-4">
+
+                                                <%@include file="fragments/modal_add_funds.jsp" %>
+
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="col-4 d-flex justify-content-start mt-4"> </div>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                     <div class="col-5 d-flex justify-content-center mt-4">
                                         <a href="#"
                                            class="nav-link mx-2 text-uppercase my-btn-red">
-                                            <i class="far fa-edit me-1"></i><fmt:message key="account.btn.edit.profile"/>
+                                            <i class="far fa-edit me-1"></i><fmt:message
+                                                key="account.btn.edit.profile"/>
                                         </a>
                                     </div>
+
                                     <div class="col-3 d-flex justify-content-end mt-4">
                                         <a href="controller?action=log_out"
                                            class="nav-link mx-2 text-uppercase my-btn-red">
-                                            <i class="fa-solid fa-right-from-bracket me-1"></i><fmt:message key="account.btn.logout"/>
+                                            <i class="fa-solid fa-right-from-bracket me-1"></i><fmt:message
+                                                key="account.btn.logout"/>
                                         </a>
                                     </div>
                                 </div>
@@ -117,6 +127,11 @@
 </section>
 
 <jsp:include page="includes/footer.jsp"/>
+
+<input type="hidden" id="valid_status" value="${ sessionScope.valid_status }">
+<input type="hidden" id="locale" value="${ sessionScope.locale }">
+<c:set var="valid_status" value="none" scope="session"/>
+<script type="text/javascript" src="js/validating-alert.js"></script>
 
 </body>
 </html>

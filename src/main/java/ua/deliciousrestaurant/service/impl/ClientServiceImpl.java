@@ -7,6 +7,7 @@ import ua.deliciousrestaurant.exception.se.WrongPasswordException;
 import ua.deliciousrestaurant.model.dao.DaoFactory;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.entity.Client;
+import ua.deliciousrestaurant.model.entity.Role;
 import ua.deliciousrestaurant.service.ClientService;
 import ua.deliciousrestaurant.utils.ConvertorUtil;
 import ua.deliciousrestaurant.utils.PasswordCode;
@@ -28,7 +29,13 @@ public class ClientServiceImpl implements ClientService {
             Client client = DaoFactory.getInstance().getClientDAO().getClientByEmail(email).orElseThrow(NoSuchClientException::new);
 
             if (PasswordCode.verify(client.getPassword(), password)) {
+
                 clientDTO = ConvertorUtil.convertUserToDTO(client);
+
+                if (client.getRole().equals(Role.CLIENT)) {
+                    addInfoToClient(clientDTO);
+                }
+
             } else {
                 throw new WrongPasswordException();
             }
@@ -38,5 +45,48 @@ public class ClientServiceImpl implements ClientService {
         }
 
         return clientDTO;
+    }
+
+    @Override
+    public void addInfoToClient(ClientDTO clientDTO) throws ServiceException {
+        updateWalletBalance(clientDTO);
+        updateNumberOfOrder(clientDTO);
+        updateTotalFundsSpent(clientDTO);
+    }
+
+    public void updateWalletBalance(ClientDTO clientDTO) throws ServiceException {
+        try {
+            clientDTO.setWalletBalance(DaoFactory.getInstance().getClientDAO().getCurrentWalletBalance(clientDTO.getClientId()));
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateNumberOfOrder(ClientDTO clientDTO) throws ServiceException {
+        try {
+            clientDTO.setTotalOrders(DaoFactory.getInstance().getClientDAO().getNumberOfOrder(clientDTO.getClientId()));
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateTotalFundsSpent(ClientDTO clientDTO) throws ServiceException {
+        try {
+            clientDTO.setTotalFundsSpent(DaoFactory.getInstance().getClientDAO().getTotalFundsSpent(clientDTO.getClientId()));
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void addFundsToWallet(int clientId, int funds) throws ServiceException {
+        try {
+            int currentBalance = DaoFactory.getInstance().getClientDAO().getCurrentWalletBalance(clientId);
+            DaoFactory.getInstance().getClientDAO().addFundsToWallet(clientId, funds + currentBalance);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 }

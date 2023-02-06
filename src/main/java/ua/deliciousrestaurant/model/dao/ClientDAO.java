@@ -15,5 +15,10 @@ public interface ClientDAO {
     boolean deleteClient(String email) throws DaoException;
     List<ClientDTO> getAllClients() throws DaoException;
     Optional<Client> getClientByEmail(String email) throws DaoException;
+    int getNumberOfOrder(int clientId) throws DaoException;
+    int getTotalFundsSpent(int clientId) throws DaoException;
+    int getCurrentWalletBalance(int clientId) throws DaoException;
+    boolean addFundsToWallet(int clientId, int funds) throws DaoException;
+    boolean updateNotificationState(int clientId, boolean isEnable) throws DaoException;
 
 }

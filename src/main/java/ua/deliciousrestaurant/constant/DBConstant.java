@@ -4,9 +4,14 @@ public class DBConstant {
 
     public static final String FIND_CLIENT_BY_EMAIL = "SELECT * FROM client WHERE email = ?";
     public static final String GET_ALL_CLIENTS = "SELECT * FROM client";
+    public static final String GET_CLIENT_CURRENT_BALANCE = "SELECT client_wallet FROM `client` WHERE client_id = ?";
+    public static final String GET_CLIENT_TOTAL_FUNDS_SPENT = "SELECT sum(order_amount) as total_sum FROM `order` WHERE client_id = ?";
+    public static final String GET_CLIENT_TOTAL_ORDERS = "SELECT count(*) as total_orders FROM `order` WHERE client_id = ?";
     public static final String INSERT_CLIENT = "INSERT INTO client (role_id, email, password, client_first_name, client_last_name, address, client_phone_number) VALUE (?, ?, ?, ?, ?, ?, ?)";
 
     public static final String UPDATE_CLIENT = "UPDATE client SET role_id = ?, email = ?, password = ?, client_first_name = ?, client_last_name = ?, address = ?, client_phone_number = ? WHERE client_id = ?";
+    public static final String UPDATE_CLIENT_WALLET = "UPDATE client SET client_wallet = ? WHERE client_id = ?";
+    public static final String UPDATE_CLIENT_NOTIFICATION = "UPDATE client SET client_notification = ? WHERE client_id = ?";
     public static final String DELETE_CLIENT = "DELETE FROM client WHERE email = ?";
 
     public static final String GET_TOTAL_PRICE = "SELECT prod_cost FROM product WHERE prod_id = ?";
