@@ -16,4 +16,6 @@ public interface ClientService {
     void updateTotalFundsSpent(ClientDTO clientDTO) throws ServiceException;
 
     void addFundsToWallet(int clientId, int funds) throws ServiceException;
+
+    boolean checkEmailUniq(String email) throws ServiceException;
 }

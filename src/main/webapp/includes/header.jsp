@@ -45,7 +45,7 @@
                         <%-- orders --%>
                         <c:if test="${ sessionScope.role eq 'CLIENT'}">
                             <li>
-                                <a href="controller?action=view-orders-for-user&sort_field=order_id&sort_order=des&client_id_filter=${ sessionScope.auth.getClientId() }&order_status=-1&search_field=NoNe&offset=0&records=8&cur_page=1"
+                                <a href="controller?action=view-orders-for-user&sort_field=order_date&sort_order=desc&client_id_filter=${ sessionScope.auth.getClientId() }&order_status=-1&search_field=NoNe&offset=0&records=8&cur_page=1"
                                    class="nav-link mx-2 text-uppercase">
                                     <fmt:message key="orders"/>
                                 </a>

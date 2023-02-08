@@ -187,7 +187,7 @@
 
 <section class="vh-200 section-style" style="padding: 10px 0;">
     <div class="container h-100 container-style">
-        <div class="row border border-danger rounded">
+        <div class="row">
 
             <c:forEach var="product" items="${ sessionScope.products }">
                 <div class="col-md-3 my-3">
@@ -198,10 +198,10 @@
                             <h5 class="card-title"><fmt:message key="price"/>${ product.getCostProduct() }</h5>
                             <h5 class="card-title"><fmt:message key="category"/>${ product.getCategoryName() }</h5>
                             <div class="mt-3 d-flex justify-content-between">
-                                <a href="controller?action=atc&id=${ product.getIdProduct() }" class="btn btn-danger">
+                                <a href="controller?action=view-menu&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&category_filter_id=${ sessionScope.category_filter_id }&prod_id=${ product.getIdProduct() }&offset=${ requestScope.offset }&records=${ requestScope.records}&cur_page=${ requestScope.cur_scope }" class="btn btn-danger">
                                     <fmt:message key="add.to.cart"/>
                                 </a>
-                                <a href="controller?action=order-now&prod-id=${ product.getIdProduct() }&quantity=1"
+                                <a href="controller?action=view-menu&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&category_filter_id=${ sessionScope.category_filter_id }&prod_id=${ product.getIdProduct() }&offset=${ requestScope.offset }&records=${ requestScope.records}&cur_page=${ requestScope.cur_scope }"
                                    class="btn btn-warning">
                                     <fmt:message key="buy.now"/>
                                 </a>
@@ -220,6 +220,22 @@
 <jsp:include page="includes/pagination.jsp"/>
 
 <jsp:include page="includes/footer.jsp"/>
+
+<input type="hidden" id="isAlreadyAdded" value="${ requestScope.isAlreadyAdded }">
+<input type="hidden" id="locale" value="${ sessionScope.locale }">
+<c:set var="isAlreadyAdded" value="false" scope="request"/>
+<c:set var="prod_id" value="none" scope="request"/>
+<script type="text/javascript">
+    var status = document.getElementById("isAlreadyAdded").value;
+    var locale = document.getElementById("locale").value;
+    if (status === "true") {
+        if (locale == null || locale === "en") {
+            swal("In the cart!", "The product has already been added to the cart!", "info");
+        } else {
+            swal("В кошику!", "Продукт уже додано до кошика!", "info");
+        }
+    }
+</script>
 
 </body>
 </html>

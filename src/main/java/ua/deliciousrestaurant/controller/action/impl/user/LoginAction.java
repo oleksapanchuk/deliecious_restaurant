@@ -2,18 +2,14 @@ package ua.deliciousrestaurant.controller.action.impl.user;
 
 import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.ServiceException;
-import ua.deliciousrestaurant.exception.se.NoSuchClientException;
 import ua.deliciousrestaurant.exception.se.WrongPasswordException;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
-import ua.deliciousrestaurant.service.ClientService;
 import ua.deliciousrestaurant.service.ServiceFactory;
-import ua.deliciousrestaurant.service.impl.ClientServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static ua.deliciousrestaurant.constant.ActionConstant.*;
-import static ua.deliciousrestaurant.controller.action.ActionUtil.getActionToRedirect;
 
 public class LoginAction implements Action {
 
@@ -22,24 +18,24 @@ public class LoginAction implements Action {
         String email = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);
 
-        if (email == null || email.equals("")) {
-            request.getSession().setAttribute("valid_status", "emptyEmail");
+        if (ServiceFactory.getInstance().getClientService().checkEmailUniq(email)) {
+            request.getSession().setAttribute(VALID_STATUS, "user.not.exist");
             return LOGIN_PAGE;
         }
 
         try {
+
             ClientDTO client = ServiceFactory.getInstance().getClientService().login(email, password);
 
             setLoggedUser(request, client);
 
             return ACCOUNT_PAGE;
 
-        } catch (NoSuchClientException | WrongPasswordException e) {
-            request.getSession().setAttribute(ERROR, e.getMessage());
-            request.getSession().setAttribute("valid_status", e.getMessage());
-            request.getSession().setAttribute(EMAIL, email);
+        } catch (WrongPasswordException e) {
+            request.getSession().setAttribute(VALID_STATUS, "wrong.password");
+            return LOGIN_PAGE;
         }
-        return getActionToRedirect(ACTION_LOGIN);
+
     }
 
     private static void setLoggedUser(HttpServletRequest request, ClientDTO client) {

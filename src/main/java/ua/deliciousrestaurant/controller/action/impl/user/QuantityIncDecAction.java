@@ -16,7 +16,7 @@ public class QuantityIncDecAction implements Action {
         String act = request.getParameter(OPERATION);
         int id = Integer.parseInt(request.getParameter(PRODUCT_ID));
 
-        ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+        ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute(CART_LIST);
 
         if ( act != null && id >= 0) {
             if ( act.equals(INCREMENT) ) {

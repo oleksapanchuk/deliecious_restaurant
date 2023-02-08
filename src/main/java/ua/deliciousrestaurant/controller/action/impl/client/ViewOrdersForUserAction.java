@@ -3,7 +3,6 @@ package ua.deliciousrestaurant.controller.action.impl.client;
 import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
-import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.entity.Order;
 import ua.deliciousrestaurant.service.ServiceFactory;
 import ua.deliciousrestaurant.utils.query.QueryBuilder;
@@ -23,13 +22,11 @@ public class ViewOrdersForUserAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String sortField = request.getParameter(SORT_FIELD);
         String sortOrder = request.getParameter(SORT_ORDER);
-        int clientIdFilter = ((ClientDTO) request.getSession().getAttribute(AUTH)).getClientId();
+        int clientIdFilter = Integer.parseInt(request.getParameter(CLIENT_ID_FILTER));
         int orderStatus = Integer.parseInt(request.getParameter(ORDER_STATUS));
         int offset = Integer.parseInt(request.getParameter(OFFSET));
         int records = Integer.parseInt(request.getParameter(RECORDS));
         String searchInfo = request.getParameter(SEARCH_FIELD);
-
-        System.out.println(request.getHeader("referer"));
 
         QueryBuilder queryBuilder = new QueryBuilder()
                 .setSortField(sortField)
@@ -71,4 +68,5 @@ public class ViewOrdersForUserAction implements Action {
 
         return ORDERS_PAGE_JSP;
     }
+
 }

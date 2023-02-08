@@ -20,5 +20,6 @@ public interface ClientDAO {
     int getCurrentWalletBalance(int clientId) throws DaoException;
     boolean addFundsToWallet(int clientId, int funds) throws DaoException;
     boolean updateNotificationState(int clientId, boolean isEnable) throws DaoException;
+    boolean isEmailUniq(String email) throws DaoException;
 
 }

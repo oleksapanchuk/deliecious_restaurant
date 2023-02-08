@@ -28,20 +28,18 @@ public class ClientServiceImpl implements ClientService {
         try {
             Client client = DaoFactory.getInstance().getClientDAO().getClientByEmail(email).orElseThrow(NoSuchClientException::new);
 
-            if (PasswordCode.verify(client.getPassword(), password)) {
-
-                clientDTO = ConvertorUtil.convertUserToDTO(client);
-
-                if (client.getRole().equals(Role.CLIENT)) {
-                    addInfoToClient(clientDTO);
-                }
-
-            } else {
+            if (!PasswordCode.verify(client.getPassword(), password)) {
                 throw new WrongPasswordException();
             }
 
-        } catch (DaoException e) {
-            throw new ServiceException(e);
+            clientDTO = ConvertorUtil.convertUserToDTO(client);
+
+            if (client.getRole().equals(Role.CLIENT)) {
+                addInfoToClient(clientDTO);
+            }
+
+        } catch (WrongPasswordException | DaoException e) {
+            throw new WrongPasswordException();
         }
 
         return clientDTO;
@@ -85,6 +83,15 @@ public class ClientServiceImpl implements ClientService {
         try {
             int currentBalance = DaoFactory.getInstance().getClientDAO().getCurrentWalletBalance(clientId);
             DaoFactory.getInstance().getClientDAO().addFundsToWallet(clientId, funds + currentBalance);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean checkEmailUniq(String email) throws ServiceException {
+        try {
+            return DaoFactory.getInstance().getClientDAO().isEmailUniq(email);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -6,11 +6,9 @@ import ua.deliciousrestaurant.model.entity.Cart;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import static ua.deliciousrestaurant.constant.ActionConstant.CART_PAGE;
-import static ua.deliciousrestaurant.constant.ActionConstant.PRODUCT_ID;
+import static ua.deliciousrestaurant.constant.ActionConstant.*;
 
 public class RemoveFromCartAction implements Action {
     @Override
@@ -19,11 +17,11 @@ public class RemoveFromCartAction implements Action {
 
         if ( id != null ) {
             int prodId = Integer.parseInt(id);
-            ArrayList<Cart> cartList = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+            ArrayList<Cart> cartList = (ArrayList<Cart>) request.getSession().getAttribute(CART_LIST);
             if ( cartList != null ) {
                 for (Cart cart : cartList) {
                     if ( cart.getProduct().getIdProduct() == prodId ) {
-                        cartList.remove( cartList.indexOf(cart) );
+                        cartList.remove(cart);
                         break;
                     }
                 }

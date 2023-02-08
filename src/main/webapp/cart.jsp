@@ -15,7 +15,7 @@
 
 <jsp:include page="includes/header.jsp"/>
 
-<c:if test="${ cart_list.size() <= 0 || cart_list == null }">
+<c:if test="${ sessionScope.cart_list.size() <= 0 || sessionScope.cart_list == null }">
     <section class="vh-200" style="background-color: #eee;">
         <div class="container h-100 justify-content-center container-style">
             <p class="col-12 text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="padding: 50px 0;">
@@ -23,7 +23,7 @@
             </p>
             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" style="padding: 50px 0;">
                 <a type="button" class="btn btn-danger btn-lg"
-                        href="controller?action=view-menu&sort_field=p.category_id&sort_order=asc&category_filter_id=0&offset=0&records=8&cur_page=1">
+                   href="controller?action=view-menu&sort_field=p.category_id&sort_order=asc&category_filter_id=0&offset=0&records=8&cur_page=1">
                     <fmt:message key="menu"/>
                 </a>
             </div>
@@ -31,24 +31,22 @@
     </section>
 </c:if>
 
-<c:if test="${ cart_items.size() > 0}">
+<c:if test="${ requestScope.cart_items.size() > 0}">
 
     <section class="vh-200 section-style" style="padding: 10px 0;">
 
         <div class="container h-100 container-style my-3">
-            <div class="d-flex py-3 ">
-                <h3>
-                    <fmt:message key="cart.total.price.top"/>${ requestScope.totalPrice > 0 ? requestScope.totalPrice : 0 }
-                    <fmt:message key="currency"/>
-                </h3>
-                <a class="mx-3 btn btn-primary" href="controller?action=order-all">
-                    <fmt:message key="cart.check.out"/>
-                </a>
+
+            <div class="row d-flex justify-content-end my-3 px-2">
+
+                <jsp:include page="fragments/buy_all.jsp"/>
+
             </div>
+
         </div>
     </section>
 
-    <section class="vh-200 section-style">
+    <section class="vh-200 section-style p-1">
         <div class="container h-100 container-style" style="min-height: 400px;">
             <div class="row my-2">
 
@@ -80,12 +78,12 @@
                                     <input type="hidden" name="id" value="${ cart.getQuantity() }" class="form-input">
                                     <div class="form-group d-flex justify-content-center">
                                         <a class="btn btn-decre"
-                                           href="controller?action=inc-dec-quantity&operation=inc&id=${ cart.getProduct().getIdProduct() }"><i
+                                           href="controller?action=inc-dec-quantity&operation=dec&prod_id=${ cart.getProduct().getIdProduct() }"><i
                                                 class="fas fa-minus-square"></i></a>
                                         <input type="text" name="quantity" class="form-control w-75 text-center"
                                                value="${ cart.getQuantity() }" readonly>
                                         <a class="btn btn-incre"
-                                           href="controller?action=inc-dec-quantity&operation=inc&id=${ cart.getProduct().getIdProduct() }"><i
+                                           href="controller?action=inc-dec-quantity&operation=inc&prod_id=${ cart.getProduct().getIdProduct() }"><i
                                                 class="fas fa-plus-square"></i></a>
                                     </div>
                                 </form>
@@ -95,13 +93,13 @@
                                     key="currency"/></td>
                             <td class="text-center">
                                 <a class="btn btn-warning"
-                                   href="controller?action=order-now&prod-id=${ cart.getProduct().getIdProduct() }&quantity=${ cart.getQuantity() }">
+                                   href="controller?action=order-now&prod_id=${ cart.getProduct().getIdProduct() }&quantity=${ cart.getQuantity() }">
                                     <fmt:message key="cart.buy"/>
                                 </a>
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-danger"
-                                   href="controller?action=remove-from-cart&id=${ cart.getProduct().getIdProduct() }">
+                                   href="controller?action=remove-from-cart&prod_id=${ cart.getProduct().getIdProduct() }">
                                     <fmt:message key="cart.remove"/>
                                 </a>
                             </td>
@@ -118,6 +116,25 @@
 </c:if>
 
 <jsp:include page="includes/footer.jsp"/>
+
+<%--todo--%>
+<input type="hidden" id="status" value="${ requestScope.status }">
+<input type="hidden" id="locale" value="${ sessionScope.locale }">
+<c:set var="status" value="none" scope="request"/>
+<script type="text/javascript">
+    var status = document.getElementById("status").value;
+    var locale = document.getElementById("locale").value;
+
+    if (status === "order_failed") {
+        if (locale == null || locale === "en") {
+            swal("Error", "Order not created!", "error");
+        } else {
+            swal("Помилка", "Замовлення не створено!", "error");
+        }
+    }
+
+</script>
+<%--todo--%>
 
 </body>
 </html>

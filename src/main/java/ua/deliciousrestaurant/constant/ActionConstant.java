@@ -7,7 +7,6 @@ public final class ActionConstant {
     public static final String ACTION_LOGIN = "log-in";
     public static final String ACTION_SIGN_UP = "sign-up";
     public static final String ACTION_LOGOUT = "log_out";
-    public static final String ACTION_ADD_TO_CART = "atc";
     public static final String ACTION_ORDER_NOW = "order-now";
     public static final String ACTION_REMOVE_FROM_CART = "remove-from-cart";
     public static final String ACTION_INC_DEC_QUANTITY = "inc-dec-quantity";
@@ -24,7 +23,8 @@ public final class ActionConstant {
 
 
     /* PAGES */
-    public static final String HREF_ORDER_PAGE = "controller?action=view-orders-for-managers&sort_field=order_id&sort_order=des&client_id_filter=0&order_status=-1&offset=0&records=8&cur_page=1";
+    public static final String HREF_ORDER_PAGE_CLIENT = "controller?action=view-orders-for-user&sort_field=order_date&sort_order=des&client_id_filter=-1&order_status=-1&offset=0&records=8&cur_page=1";
+    public static final String HREF_ORDER_PAGE_MANAGER = "controller?action=view-orders-for-managers&sort_field=order_id&sort_order=des&client_id_filter=0&order_status=-1&offset=0&records=8&cur_page=1";
 
     public static final String CONTROLLER_PAGE = "controller";
     public static final String INDEX_PAGE = "index.jsp";
@@ -66,11 +66,11 @@ public final class ActionConstant {
     public static final String END_PAGE = "end";
 
 
-    public static final String CART_LIST = "cart-list";
+    public static final String CART_LIST = "cart_list";
 
 
     public static final String OPERATION = "operation";
-    public static final String PRODUCT_ID = "id";
+    public static final String PRODUCT_ID = "prod_id";
     public static final String ORDER_ID = "order-id";
     public static final String IS_LIKED_ORDER = "is-liked-order";
 

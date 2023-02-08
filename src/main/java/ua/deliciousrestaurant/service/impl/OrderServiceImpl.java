@@ -2,12 +2,10 @@ package ua.deliciousrestaurant.service.impl;
 
 import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
-import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.dao.DaoFactory;
 import ua.deliciousrestaurant.model.entity.Order;
 import ua.deliciousrestaurant.service.OrderService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static ua.deliciousrestaurant.constant.ActionConstant.HREF_ORDER_PAGE;
+import static ua.deliciousrestaurant.constant.ActionConstant.HREF_ORDER_PAGE_CLIENT;
 import static ua.deliciousrestaurant.constant.ActionConstant.LOGIN_PAGE;
 
 public class BuyNowAction implements Action {
@@ -56,7 +56,7 @@ public class BuyNowAction implements Action {
                             }
                         }
                     }
-                    return HREF_ORDER_PAGE;
+                    return HREF_ORDER_PAGE_CLIENT;
                 } else {
                     throw new ServiceException();
                 }

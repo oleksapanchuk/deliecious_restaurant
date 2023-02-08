@@ -1,6 +1,7 @@
 package ua.deliciousrestaurant.model.dao;
 
 import ua.deliciousrestaurant.exception.DaoException;
+import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.dto.ProductDTO;
 import ua.deliciousrestaurant.model.entity.Cart;
 import ua.deliciousrestaurant.model.entity.Product;

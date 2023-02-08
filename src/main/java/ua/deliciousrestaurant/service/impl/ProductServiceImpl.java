@@ -60,8 +60,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> getAllProducts(HttpServletRequest request, String endQuery) throws DaoException, ServiceException {
-        return DaoFactory.getInstance().getProductDAO().getAllProduct((getLocale(request).equals("en") ? SELECT_PRODUCT_ENG : SELECT_PRODUCT_UA) + endQuery);
+    public int getTotalCartPrice(List<Cart> cartList) throws ServiceException {
+        try {
+            return DaoFactory.getInstance().getProductDAO().getTotalCartPrice(cartList);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<ProductDTO> getAllProducts(HttpServletRequest request, String endQuery) throws ServiceException {
+        try {
+            return DaoFactory.getInstance().getProductDAO().getAllProduct((getLocale(request).equals("en") ? SELECT_PRODUCT_ENG : SELECT_PRODUCT_UA) + endQuery);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

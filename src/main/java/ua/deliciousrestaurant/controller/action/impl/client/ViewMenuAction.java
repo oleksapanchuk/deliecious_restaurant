@@ -5,11 +5,15 @@ import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.dao.DaoFactory;
 import ua.deliciousrestaurant.model.dto.ProductDTO;
+import ua.deliciousrestaurant.model.entity.Cart;
+import ua.deliciousrestaurant.model.entity.Product;
 import ua.deliciousrestaurant.service.ServiceFactory;
 import ua.deliciousrestaurant.utils.query.QueryBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,6 +53,10 @@ public class ViewMenuAction implements Action {
             }
         }
 
+        if (request.getParameter(PRODUCT_ID) != null && !request.getParameter(PRODUCT_ID).equals("none")) {
+            addToCart(request);
+        }
+
         try {
             List<ProductDTO> products = ServiceFactory.getInstance().getProductService().getAllProducts(request, queryBuilder.getQuery());
             int numberOfProducts = ServiceFactory.getInstance().getProductService().getNumberOfProducts(SELECT_PRODUCT_NUMBER + queryBuilder.getQueryNoLimits());
@@ -68,6 +76,30 @@ public class ViewMenuAction implements Action {
             throw new RuntimeException(e);
         }
         return MENU_PAGE;
+    }
+
+    void addToCart(HttpServletRequest request) {
+
+        int prodId = Integer.parseInt(request.getParameter(PRODUCT_ID));
+        Cart product = Cart.builder()
+                .product(Product.builder().idProduct(prodId).build())
+                .quantity(1)
+                .build();
+
+        List<Cart> cartList = (ArrayList<Cart>) request.getSession().getAttribute(CART_LIST);
+        if (cartList == null) {
+            cartList = new ArrayList<>();
+        } else {
+            for (Cart c : cartList) {
+                if (c.getProduct().getIdProduct() == prodId) {
+                    request.setAttribute("isAlreadyAdded", true);
+                    return;
+                }
+            }
+        }
+
+        cartList.add(product);
+        request.getSession().setAttribute(CART_LIST, cartList);
     }
 
 }

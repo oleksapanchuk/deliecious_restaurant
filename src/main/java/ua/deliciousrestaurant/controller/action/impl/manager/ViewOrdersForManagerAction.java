@@ -31,8 +31,6 @@ public class ViewOrdersForManagerAction implements Action {
         int records = Integer.parseInt(request.getParameter(RECORDS));
         String searchInfo = request.getParameter(SEARCH_FIELD);
 
-        System.out.println(request.getHeader("referer"));
-
         QueryBuilder queryBuilder = new QueryBuilder()
                 .setSortField(sortField)
                 .setOrder(sortOrder)

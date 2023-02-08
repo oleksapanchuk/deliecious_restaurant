@@ -7,6 +7,7 @@ import ua.deliciousrestaurant.model.dao.DaoFactory;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.entity.Client;
 import ua.deliciousrestaurant.model.entity.Role;
+import ua.deliciousrestaurant.service.ServiceFactory;
 import ua.deliciousrestaurant.utils.ConvertorUtil;
 import ua.deliciousrestaurant.utils.PasswordCode;
 
@@ -25,6 +26,12 @@ public class SignUpAction implements Action {
         String lastName = request.getParameter(REG_LAST_NAME);
         String address = request.getParameter(REG_ADDRESS);
 
+        System.out.println(ServiceFactory.getInstance().getClientService().checkEmailUniq(email));
+
+        if (!ServiceFactory.getInstance().getClientService().checkEmailUniq(email)) {
+            request.getSession().setAttribute(VALID_STATUS, "user.exist");
+            return SIGN_UP_PAGE;
+        }
 
         Client client = Client.builder()
                 .email(email)

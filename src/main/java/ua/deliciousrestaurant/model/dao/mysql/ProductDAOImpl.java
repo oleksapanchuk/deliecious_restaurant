@@ -1,6 +1,7 @@
 package ua.deliciousrestaurant.model.dao.mysql;
 
 import ua.deliciousrestaurant.exception.DaoException;
+import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.dao.ProductDAO;
 import ua.deliciousrestaurant.model.dto.ProductDTO;

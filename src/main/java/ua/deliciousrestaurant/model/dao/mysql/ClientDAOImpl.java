@@ -246,6 +246,21 @@ public class ClientDAOImpl implements ClientDAO {
         }
     }
 
+    @Override
+    public boolean isEmailUniq(String email) throws DaoException {
+
+        try (Connection con = DataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(DBConstant.CHECK_EMAIL_UNIQ)) {
+
+            ps.setString(1, email);
+
+           return !ps.executeQuery().next();
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     private Optional<Client> createClient(ResultSet rs) throws SQLException {
 
         return Optional.of(

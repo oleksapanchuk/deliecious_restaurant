@@ -23,35 +23,40 @@ public class BuyAllAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd:hh-mm-ss");
         ClientDTO auth = (ClientDTO) request.getSession().getAttribute(AUTH);
-        List<Cart> products = (ArrayList<Cart>) request.getSession().getAttribute("cart-list"); //todo
+        List<Cart> products = (ArrayList<Cart>) request.getSession().getAttribute(CART_LIST);
+
+        int totalPrice = Integer.parseInt(request.getParameter("total_price"));
+        String addressBuy = request.getParameter("address_buy");
 
         try {
-            if (auth != null) {
+            if (auth == null) { return LOGIN_PAGE; }
 
-                Order order = Order.builder()
-                        .clientId(auth.getClientId())
-                        .statusId(1)
-                        .orderTotalPrice(DaoFactory.getInstance().getProductDAO().getTotalCartPrice(products))
-                        .addressDelivery(auth.getAddress())
-                        .date(formatter.format(new Date()))
-                        .isOrderLiked(false)
-                        .orderProducts(ServiceFactory.getInstance().getProductService().getCartProducts(products))
-                        .build();
+            Order order = Order.builder()
+                    .clientId(auth.getClientId())
+                    .statusId(1)
+                    .orderTotalPrice(DaoFactory.getInstance().getProductDAO().getTotalCartPrice(products))
+                    .addressDelivery(auth.getAddress())
+                    .date(formatter.format(new Date()))
+                    .isOrderLiked(false)
+                    .orderTotalPrice(totalPrice)
+                    .addressDelivery(addressBuy)
+                    .orderProducts(ServiceFactory.getInstance().getProductService().getCartProducts(products))
+                    .build();
 
-                if (DaoFactory.getInstance().getOrderDAO().insertOrder(order)) {
-                    products.clear();
-                    return HREF_ORDER_PAGE;
-                } else {
-                    //todo
-                    System.out.println("order failed");
-                }
-
-            } else {
-                return LOGIN_PAGE;
+            if (DaoFactory.getInstance().getOrderDAO().insertOrder(order)) {
+                products.clear();
+                ServiceFactory.getInstance().getClientService().addFundsToWallet(auth.getClientId(), -totalPrice);
+                ServiceFactory.getInstance().getClientService().updateWalletBalance(auth);
+                ServiceFactory.getInstance().getClientService().updateNumberOfOrder(auth);
+                ServiceFactory.getInstance().getClientService().updateTotalFundsSpent(auth);
+                return HREF_ORDER_PAGE_CLIENT;
             }
+
+            request.setAttribute("status", "order_failed");
+            return CART_PAGE;
+
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 }

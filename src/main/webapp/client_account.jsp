@@ -128,10 +128,7 @@
 
 <jsp:include page="includes/footer.jsp"/>
 
-<input type="hidden" id="valid_status" value="${ sessionScope.valid_status }">
-<input type="hidden" id="locale" value="${ sessionScope.locale }">
-<c:set var="valid_status" value="none" scope="session"/>
-<script type="text/javascript" src="js/validating-alert.js"></script>
+<jsp:include page="includes/sweetalert.jsp"/>
 
 </body>
 </html>

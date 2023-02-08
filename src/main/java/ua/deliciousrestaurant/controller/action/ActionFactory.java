@@ -26,7 +26,7 @@ public final class ActionFactory {
             actionMap.put(ACTION_SIGN_UP, new SignUpAction());
             actionMap.put(ACTION_LOGOUT, new LogoutAction());
 
-            actionMap.put(ACTION_ADD_TO_CART, new AddToCartAction());
+
             actionMap.put(ACTION_ORDER_NOW, new BuyNowAction());
             actionMap.put(ACTION_REMOVE_FROM_CART, new RemoveFromCartAction());
             actionMap.put(ACTION_INC_DEC_QUANTITY, new QuantityIncDecAction());
