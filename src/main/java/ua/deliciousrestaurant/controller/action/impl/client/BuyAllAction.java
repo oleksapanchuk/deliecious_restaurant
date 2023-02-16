@@ -29,7 +29,7 @@ public class BuyAllAction implements Action {
         String addressBuy = request.getParameter("address_buy");
 
         try {
-            if (auth == null) { return LOGIN_PAGE; }
+            if (auth == null) { return HREF_LOGIN; }
 
             Order order = Order.builder()
                     .clientId(auth.getClientId())
@@ -40,7 +40,7 @@ public class BuyAllAction implements Action {
                     .isOrderLiked(false)
                     .orderTotalPrice(totalPrice)
                     .addressDelivery(addressBuy)
-                    .orderProducts(ServiceFactory.getInstance().getProductService().getCartProducts(products))
+                    .orderProducts(ServiceFactory.getInstance().getProductService().getCartProducts(products, (String) request.getSession().getAttribute(LOCALE)))
                     .build();
 
             if (DaoFactory.getInstance().getOrderDAO().insertOrder(order)) {
@@ -49,11 +49,12 @@ public class BuyAllAction implements Action {
                 ServiceFactory.getInstance().getClientService().updateWalletBalance(auth);
                 ServiceFactory.getInstance().getClientService().updateNumberOfOrder(auth);
                 ServiceFactory.getInstance().getClientService().updateTotalFundsSpent(auth);
-                return HREF_ORDER_PAGE_CLIENT;
+
+                return "controller?action=view-orders-for-user&sort_field=order_date&sort_order=desc&client_id_filter=" + auth.getClientId() + "&order_status=-1&offset=0&records=8&cur_page=1";
             }
 
             request.setAttribute("status", "order_failed");
-            return CART_PAGE;
+            return HREF_CART;
 
         } catch (DaoException e) {
             throw new RuntimeException(e);

@@ -38,7 +38,7 @@
                     <th scope="col"><fmt:message key="order.date"/></th>
                     <th scope="col" class="text-center"><fmt:message key="order.total.price"/></th>
                     <th scope="col" class="text-center"><fmt:message key="order.status"/></th>
-                    <th scope="col" class="text-center"><fmt:message key="order.details"/></th>
+<%--                    <th scope="col" class="text-center"><fmt:message key="order.details"/></th>--%>
                     <th scope="col" class="text-center"><fmt:message key="order.liked"/></th>
                 </tr>
                 </thead>
@@ -56,7 +56,7 @@
 
                                 <select name="order_status" class="form-select" onchange='submit();' id="switch-lang"
                                         style="font-size: 14px; font-weight: 500;">
-                                    <option value="0" ${order.getStatusId() == 0 ? 'selected' : ''}>
+                                    <option value="5" ${order.getStatusId() == 5 ? 'selected' : ''}>
                                         <fmt:message key="order.status.canceled"/>
                                     </option>
                                     <option value="1" ${order.getStatusId() == 1 ? 'selected' : ''}>
@@ -75,9 +75,9 @@
                                 <label for="switch-lang"></label>
                             </form>
                         </td>
-                        <td class="text-center">
-                            <a class="btn btn-warning" href="#"><fmt:message key="order.show.more"/></a>
-                        </td>
+<%--                        <td class="text-center">--%>
+<%--                            <a class="btn btn-warning" href="#"><fmt:message key="order.show.more"/></a>--%>
+<%--                        </td>--%>
                         <td class="text-center">
                             <c:choose>
                                 <c:when test="${ order.isOrderLiked() }">

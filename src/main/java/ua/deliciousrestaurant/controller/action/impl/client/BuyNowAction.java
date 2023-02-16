@@ -17,57 +17,70 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static ua.deliciousrestaurant.constant.ActionConstant.HREF_ORDER_PAGE_CLIENT;
-import static ua.deliciousrestaurant.constant.ActionConstant.LOGIN_PAGE;
+import static ua.deliciousrestaurant.constant.ActionConstant.*;
+import static ua.deliciousrestaurant.controller.action.ActionUtil.isGetMethod;
 
 public class BuyNowAction implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        return isGetMethod(request) ? exeGet(request) : exePost(request);
+    }
+
+    private String exeGet(HttpServletRequest request) {
+        return "controller?action=view-cart";
+    }
+
+    private String exePost(HttpServletRequest request) throws ServiceException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd:hh-mm-ss");
+        ClientDTO auth = (ClientDTO) request.getSession().getAttribute(AUTH);
+        int prodId = Integer.parseInt(request.getParameter(PRODUCT_ID));
+        int quantity = Integer.parseInt(request.getParameter(QUANTITY));
+        ArrayList<Cart> cartList = (ArrayList<Cart>) request.getSession().getAttribute(CART_LIST);
+
 
         try {
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd:hh-mm-ss");
-            ClientDTO auth = (ClientDTO) request.getSession().getAttribute("auth");
-            int prodId = Integer.parseInt(request.getParameter("prod-id"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            ArrayList<Cart> cartList = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
-
             List<Cart> product = new ArrayList<>();
             product.add(Cart.builder().product(Product.builder().idProduct(prodId).build()).quantity(quantity).build());
+            int price = DaoFactory.getInstance().getProductDAO().getTotalCartPrice(product);
 
             if (auth != null) {
 
                 Order order = Order.builder()
                         .clientId(auth.getClientId())
                         .statusId(1)
-                        .orderTotalPrice(DaoFactory.getInstance().getProductDAO().getTotalCartPrice(product))
+                        .orderTotalPrice(price)
                         .addressDelivery(auth.getAddress())
                         .date(formatter.format(new Date()))
                         .isOrderLiked(false)
-                        .orderProducts(ServiceFactory.getInstance().getProductService().getCartProducts(product))
+                        .orderProducts(ServiceFactory.getInstance().getProductService().getCartProducts(product, (String) request.getSession().getAttribute(LOCALE)))
                         .build();
 
                 if (DaoFactory.getInstance().getOrderDAO().insertOrder(order)) {
-                    if ( cartList != null ) {
-                        for (Cart cart : cartList) {
-                            if ( cart.getProduct().getIdProduct() == prodId ) {
-                                cartList.remove( cartList.indexOf(cart) );
-                                break;
-                            }
+
+                    for (Cart cart : cartList) {
+                        if (cart.getProduct().getIdProduct() == prodId) {
+                            cartList.remove(cart);
+                            break;
                         }
                     }
-                    return HREF_ORDER_PAGE_CLIENT;
-                } else {
-                    throw new ServiceException();
+
+                    ServiceFactory.getInstance().getClientService().addFundsToWallet(auth.getClientId(), -price);
+                    ServiceFactory.getInstance().getClientService().updateWalletBalance(auth);
+                    ServiceFactory.getInstance().getClientService().updateNumberOfOrder(auth);
+                    ServiceFactory.getInstance().getClientService().updateTotalFundsSpent(auth);
+
+                    return "controller?action=view-orders-for-user&sort_field=order_date&sort_order=desc&client_id_filter=" + auth.getClientId() + "&order_status=-1&offset=0&records=8&cur_page=1";
                 }
+                throw new ServiceException();
 
             } else {
-                return LOGIN_PAGE;
+                return HREF_LOGIN;
             }
 
         } catch (DaoException e) {
             throw new ServiceException();
         }
-
     }
+
 }

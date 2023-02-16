@@ -45,7 +45,7 @@
                         <%-- orders --%>
                         <c:if test="${ sessionScope.role eq 'CLIENT'}">
                             <li>
-                                <a href="controller?action=view-orders-for-user&sort_field=order_date&sort_order=desc&client_id_filter=${ sessionScope.auth.getClientId() }&order_status=-1&search_field=NoNe&offset=0&records=8&cur_page=1"
+                                <a href="controller?action=view-orders-for-user&sort_field=order_id&sort_order=desc&client_id_filter=${ sessionScope.auth.getClientId() }&order_status=-1&search_field=NoNe&offset=0&records=8&cur_page=1"
                                    class="nav-link mx-2 text-uppercase">
                                     <fmt:message key="orders"/>
                                 </a>
@@ -66,23 +66,23 @@
                         <%-- edit menu, users, orders --%>
                         <c:if test="${ sessionScope.role eq 'MANAGER' }">
                             <%-- edit menu --%>
-                            <li>
-                                <a class="nav-link mx-2 text-uppercase"
-                                   href="edit_menu_manager.jsp">
-                                    <fmt:message key="mng.edit.menu"/>
-                                </a>
-                            </li>
+<%--                            <li>--%>
+<%--                                <a class="nav-link mx-2 text-uppercase"--%>
+<%--                                   href="edit_menu_manager.jsp">--%>
+<%--                                    <fmt:message key="mng.edit.menu"/>--%>
+<%--                                </a>--%>
+<%--                            </li>--%>
                             <%-- users --%>
-                            <li>
-                                <a class="nav-link mx-2 text-uppercase"
-                                   href="controller?action=view-all-clients">
-                                    <fmt:message key="mng.clients"/>
-                                </a>
-                            </li>
+<%--                            <li>--%>
+<%--                                <a class="nav-link mx-2 text-uppercase"--%>
+<%--                                   href="controller?action=view-all-clients">--%>
+<%--                                    <fmt:message key="mng.clients"/>--%>
+<%--                                </a>--%>
+<%--                            </li>--%>
                             <%-- orders --%>
                             <li>
                                 <a class="nav-link mx-2 text-uppercase"
-                                   href="controller?action=view-orders-for-managers&sort_field=order_id&sort_order=des&client_id_filter=0&order_status=-1&offset=0&records=8&cur_page=1">
+                                   href="controller?action=view-orders-for-managers&sort_field=order_id&sort_order=desc&client_id_filter=0&order_status=-1&offset=0&records=8&cur_page=1">
                                     <fmt:message key="mng.orders"/>
                                 </a>
                             </li>
@@ -128,7 +128,7 @@
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="nav-link mx-2 text-uppercase" href="login.jsp">
+                                    <a class="nav-link mx-2 text-uppercase" href="controller?action=log-in">
                                         <i class="fa-solid fa-right-to-bracket me-1"></i> <fmt:message key="log.in"/>
                                     </a>
                                 </c:otherwise>

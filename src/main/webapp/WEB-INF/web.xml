@@ -21,6 +21,7 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+
     <filter>
         <filter-name>LocaleFilter</filter-name>
         <filter-class>ua.deliciousrestaurant.filter.LocaleFilter</filter-class>

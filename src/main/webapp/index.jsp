@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -19,12 +20,11 @@
 <section class="vh-200" style="background-color: #eee; padding: 0 0;">
     <div class="masthead">
         <div class="container">
-            <div class="masthead-subheading">
-                Welcome To Our Restaurant!
-            </div>
-            <div class="masthead-heading text-uppercase" style="-webkit-text-stroke-width: 2px; -webkit-text-stroke-color: darkred;">
-                Delicious Restaurant
-            </div>
+
+            <tags:name_project text="Welcome To Our Restaurant!" reg="low"/>
+
+            <tags:name_project text="Delicious Restaurant" reg="upper"/>
+
             <a class="btn btn-danger btn-xl text-uppercase" href="controller?action=view-menu&sort_field=p.category_id&sort_order=asc&category_filter_id=0&offset=0&records=8&cur_page=1">
                 <fmt:message key="menu"/>
             </a>

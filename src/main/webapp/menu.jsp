@@ -195,13 +195,13 @@
                         <img class="card-img-top" src="${ product.getImgProduct() }" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">${ product.getNameProduct() }</h5>
-                            <h5 class="card-title"><fmt:message key="price"/>${ product.getCostProduct() }</h5>
-                            <h5 class="card-title"><fmt:message key="category"/>${ product.getCategoryName() }</h5>
+                            <h6 class="card-subtitle mb-2"><fmt:message key="price"/>${ product.getCostProduct() } <fmt:message key="currency"/></h6>
+                            <h6 class="card-subtitle"><fmt:message key="category"/>${ product.getCategoryName() }</h6>
                             <div class="mt-3 d-flex justify-content-between">
                                 <a href="controller?action=view-menu&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&category_filter_id=${ sessionScope.category_filter_id }&prod_id=${ product.getIdProduct() }&offset=${ requestScope.offset }&records=${ requestScope.records}&cur_page=${ requestScope.cur_scope }" class="btn btn-danger">
                                     <fmt:message key="add.to.cart"/>
                                 </a>
-                                <a href="controller?action=view-menu&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&category_filter_id=${ sessionScope.category_filter_id }&prod_id=${ product.getIdProduct() }&offset=${ requestScope.offset }&records=${ requestScope.records}&cur_page=${ requestScope.cur_scope }"
+                                <a href="controller?action=view-menu&sort_field=${ sessionScope.sort_field }&sort_order=${ sessionScope.sort_order }&category_filter_id=${ sessionScope.category_filter_id }&prod_id=${ product.getIdProduct() }&isBuy=true&offset=${ requestScope.offset }&records=${ requestScope.records}&cur_page=${ requestScope.cur_scope }"
                                    class="btn btn-warning">
                                     <fmt:message key="buy.now"/>
                                 </a>

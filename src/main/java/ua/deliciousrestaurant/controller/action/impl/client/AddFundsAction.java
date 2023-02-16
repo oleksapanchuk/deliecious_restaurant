@@ -21,7 +21,7 @@ public class AddFundsAction implements Action {
             request.getSession().setAttribute(ERROR, "error.wrong.int.number");
             request.getSession().setAttribute(VALID_STATUS, "error.wrong.int.number");
 
-            return ACCOUNT_PAGE;
+            return PAGE_ACCOUNT;
         }
 
         ClientDTO clientDTO = (ClientDTO) request.getSession().getAttribute(AUTH);
@@ -35,6 +35,6 @@ public class AddFundsAction implements Action {
 
         request.getSession().setAttribute(AUTH, clientDTO);
 
-        return ACCOUNT_PAGE;
+        return PAGE_ACCOUNT;
     }
 }

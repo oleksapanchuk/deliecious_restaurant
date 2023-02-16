@@ -12,7 +12,7 @@ import java.util.Set;
 
 public interface ProductService {
 
-    List<Cart> getCartProducts(List<Cart> cartList) throws DaoException;
+    List<Cart> getCartProducts(List<Cart> cartList, String locale) throws ServiceException;
     int getNumberOfProducts(String query) throws DaoException;
     int getTotalCartPrice(List<Cart> cartList) throws ServiceException;
     List<ProductDTO> getAllProducts(HttpServletRequest request, String endQuery) throws ServiceException;

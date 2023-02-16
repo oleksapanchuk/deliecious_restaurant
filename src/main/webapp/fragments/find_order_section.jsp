@@ -120,8 +120,8 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                         <li>
-                            <a class="dropdown-item ${ not empty sessionScope.sort_field && sessionScope.sort_field  == 'order_date' ? 'text-danger' : '' }"
-                               href="controller?action=${ not empty sessionScope.role && sessionScope.role == 'CLIENT' ? 'view-orders-for-user' : 'view-orders-for-managers' }&sort_field=order_date&sort_order=${ sessionScope.sort_order }&client_id_filter=${ sessionScope.client_id_filter }&order_status=${ sessionScope.order_status }&search_field=${ sessionScope.search_field }&offset=${ requestScope.offset }&records=8&cur_page=${ requestScope.cur_page}">
+                            <a class="dropdown-item ${ not empty sessionScope.sort_field && sessionScope.sort_field  == 'order_id' ? 'text-danger' : '' }"
+                               href="controller?action=${ not empty sessionScope.role && sessionScope.role == 'CLIENT' ? 'view-orders-for-user' : 'view-orders-for-managers' }&sort_field=order_id&sort_order=${ sessionScope.sort_order }&client_id_filter=${ sessionScope.client_id_filter }&order_status=${ sessionScope.order_status }&search_field=${ sessionScope.search_field }&offset=${ requestScope.offset }&records=8&cur_page=${ requestScope.cur_page}">
                                 <fmt:message key="order.sort.by.date"/>
                             </a>
                         </li>
@@ -140,7 +140,7 @@
                     </ul>
                     <label for="selectSortFieldForOrders" class="col-5 text-danger text-center">
                         <c:choose>
-                            <c:when test="${ sessionScope.sort_field == 'order_date' }">
+                            <c:when test="${ sessionScope.sort_field == 'order_id' }">
                                 <span class="text-uppercase"><fmt:message key="order.sort.by.date"/></span>
                             </c:when>
                             <c:when test="${ sessionScope.sort_field == 'status_id' }">

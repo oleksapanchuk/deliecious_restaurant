@@ -1,7 +1,6 @@
 package ua.deliciousrestaurant.model.dao.mysql;
 
 import ua.deliciousrestaurant.exception.DaoException;
-import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.dao.ProductDAO;
 import ua.deliciousrestaurant.model.dto.ProductDTO;
@@ -43,10 +42,16 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public Optional<Product> getProductById(int productId) throws DaoException {
+    public Optional<Product> getProductById(int productId, String locale) throws DaoException {
+        String query;
+        if (locale == null || locale.equals("en")) {
+            query = GET_PRODUCT_BY_ID_ENG;
+        } else {
+            query = GET_PRODUCT_BY_ID_UA;
+        }
 
         try (Connection con = DataSource.getConnection();
-             PreparedStatement ps = con.prepareStatement(GET_PRODUCT_BY_ID)) {
+             PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setInt(1, productId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -98,12 +103,12 @@ public class ProductDAOImpl implements ProductDAO {
     public Map<Integer, String> getMapCategories(String locale) throws DaoException {
         Map<Integer, String> mapCategories = new HashMap<>();
 
-        String query = locale.equals("en") ? GET_ALL_CATEGORIES_ENG :GET_ALL_CATEGORIES_UA;
+        String query = locale.equals("en") ? GET_ALL_CATEGORIES_ENG : GET_ALL_CATEGORIES_UA;
 
         try (Connection con = DataSource.getConnection();
              PreparedStatement pst = con.prepareStatement(query)) {
 
-            try (ResultSet rs = pst.executeQuery()){
+            try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     mapCategories.put(rs.getInt(1), rs.getString(2));
                 }

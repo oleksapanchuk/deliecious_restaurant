@@ -177,7 +177,8 @@ header {
     text-align: center;
     color: #fff;
     /*background-image: url("https://media.timeout.com/images/105851927/image.jpg");*/
-    background-image: url("https://media.cntraveler.com/photos/610da075d713cfe783511976/16:9/w_2560,c_limit/The%20Black%20Sheep,%20Las%20Vega%20_Interior.jpg");
+    /*background-image: url("https://media.cntraveler.com/photos/610da075d713cfe783511976/16:9/w_2560,c_limit/The%20Black%20Sheep,%20Las%20Vega%20_Interior.jpg");*/
+    background-image: url("../img/main_index_photo.webp");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

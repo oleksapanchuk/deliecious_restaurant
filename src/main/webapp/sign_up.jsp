@@ -31,6 +31,7 @@
                                       novalidate onsubmit="checkMatching();">
                                     <input type="hidden" name="action" value="sign-up">
 
+                                    <%-- first name --%>
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fa-regular fa-user fa-lg me-3 fa-fw mt-2"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -47,6 +48,7 @@
                                         </div>
                                     </div>
 
+                                    <%-- last name --%>
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw mt-2"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -63,6 +65,7 @@
                                         </div>
                                     </div>
 
+                                    <%-- email --%>
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw mt-2"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -79,6 +82,7 @@
                                         </div>
                                     </div>
 
+                                    <%-- password --%>
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-lock fa-lg me-3 fa-fw mt-2"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -95,6 +99,7 @@
                                         </div>
                                     </div>
 
+                                    <%-- repeat password --%>
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-key fa-lg me-3 fa-fw mt-2"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -111,6 +116,7 @@
                                         </div>
                                     </div>
 
+                                    <%-- address --%>
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fa-solid fa-location-pin fa-lg me-3 fa-fw mt-2"></i>
                                         <div class="form-outline flex-fill mb-0">
@@ -135,9 +141,7 @@
                                     <p class="text-center text-muted mt-5 mb-0">
                                         <fmt:message key="sign_up.already.login"/>
                                         <a href="login.jsp" class="fw-bold text-body">
-                                            <u>
-                                                <fmt:message key="sign_up.login.here"/>
-                                            </u>
+                                            <u><fmt:message key="sign_up.login.here"/></u>
                                         </a>
                                     </p>
 

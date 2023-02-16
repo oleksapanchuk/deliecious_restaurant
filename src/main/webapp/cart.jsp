@@ -88,14 +88,111 @@
                                     </div>
                                 </form>
                             </td>
+
                             <td class="text-center"><c:out
                                     value="${ cart.getProduct().getCostProduct() * cart.getQuantity() }"/> <fmt:message
-                                    key="currency"/></td>
+                                    key="currency"/>
+                            </td>
                             <td class="text-center">
-                                <a class="btn btn-warning"
-                                   href="controller?action=order-now&prod_id=${ cart.getProduct().getIdProduct() }&quantity=${ cart.getQuantity() }">
-                                    <fmt:message key="cart.buy"/>
-                                </a>
+
+                                <!-- Button trigger modal -->
+                                <c:choose>
+                                    <c:when test="${ sessionScope.auth == null }">
+                                        <a href="login.jsp"
+                                           class="nav-link col-3 mx-2 text-uppercase text-center my-btn-red"
+                                        >
+                                            <fmt:message key="cart.buy"/>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a type="button"
+                                           class="nav-link col-3 mx-2 text-uppercase my-btn-red"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#buyNowModal">
+                                            <fmt:message key="cart.buy"/>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="buyNowModal" tabindex="-1"
+                                     aria-labelledby="buyModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <form method="post" action="controller">
+                                                <input type="hidden" name="action" value="order-now">
+                                                <input type="hidden" name="prod_id"
+                                                       value="${ cart.getProduct().getIdProduct() }">
+                                                <input type="hidden" name="quantity" value="${ cart.getQuantity() }">
+
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="buyModalLabel">
+                                                        <fmt:message key="cart.order.details"/>
+                                                    </h5>
+                                                    <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close">
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <div class="row d-flex justify-content-start">
+                                                        <div class="col-6">
+                                                            <div class="row">
+                                                                <h6><fmt:message key="cart.total.amount.of.due"/></h6>
+                                                            </div>
+                                                            <div class="row">
+                                                                <h5 class="text-muted">${ cart.getProduct().getCostProduct() * cart.getQuantity() }
+                                                                    <fmt:message key="currency"/></h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="row">
+                                                                <h6><fmt:message key="account.balance"/></h6>
+                                                            </div>
+                                                            <div class="row">
+                                                                <h5 class="text-muted">${ sessionScope.auth.getWalletBalance() }
+                                                                    <fmt:message key="currency"/></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row input-group mb-3">
+                                                        <label class="form-label" for="addressField">
+                                                            <fmt:message key="cart.input.address.delivery"/>
+                                                        </label>
+                                                        <input type="text"
+                                                               name="address_buy"
+                                                               id="addressField"
+                                                               class="form-control mx-2"
+                                                               aria-label="Amount (to the nearest dollar)">
+                                                    </div>
+
+                                                </div>
+
+                                                    <%-- buttons --%>
+                                                <div class="modal-footer">
+                                                    <c:if test="${ cart.getProduct().getCostProduct() * cart.getQuantity()  > sessionScope.auth.getWalletBalance() }">
+                                                        <a href="client_account.jsp"
+                                                           class="btn btn-success btn-lg">
+                                                            <fmt:message key="account.btn.add.funds"/>
+                                                        </a>
+                                                    </c:if>
+                                                    <button type="submit"
+                                                            class="btn ${ cart.getProduct().getCostProduct() * cart.getQuantity()  > sessionScope.auth.getWalletBalance() ? 'btn-secondary btn-lg disabled' : 'btn-grad-green-01'}"
+                                                            data-bs-dismiss="modal">
+                                                        <fmt:message key="cart.buy"/>
+                                                    </button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-danger"

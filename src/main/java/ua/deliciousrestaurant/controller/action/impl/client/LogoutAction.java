@@ -18,6 +18,6 @@ public class LogoutAction implements Action {
             session.invalidate();
             request.getSession(true).setAttribute(LOCALE, locale);
         }
-        return LOGIN_PAGE;
+        return HREF_LOGIN;
     }
 }

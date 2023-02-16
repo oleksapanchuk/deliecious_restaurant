@@ -4,7 +4,6 @@ import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
-import ua.deliciousrestaurant.model.dto.ProductDTO;
 import ua.deliciousrestaurant.model.entity.Order;
 import ua.deliciousrestaurant.service.ServiceFactory;
 import ua.deliciousrestaurant.utils.query.QueryBuilder;
@@ -12,8 +11,6 @@ import ua.deliciousrestaurant.utils.query.QueryBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import static ua.deliciousrestaurant.constant.ActionConstant.*;
 import static ua.deliciousrestaurant.utils.PaginationUtil.paginate;
@@ -69,6 +66,6 @@ public class ViewOrdersForManagerAction implements Action {
             throw new RuntimeException(e);
         }
 
-        return MNG_ORDER_PAGE;
+        return PAGE_MANAGER_ORDERS;
     }
 }

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import static ua.deliciousrestaurant.constant.ActionConstant.ORDER_ID;
 import static ua.deliciousrestaurant.constant.ActionConstant.ORDER_STATUS;
+import static ua.deliciousrestaurant.controller.action.ActionUtil.getActionToRedirect;
+import static ua.deliciousrestaurant.controller.action.ActionUtil.redirect;
 
 public class ChangeStatusAction implements Action {
 
@@ -16,14 +18,9 @@ public class ChangeStatusAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         int orderStatus = Integer.parseInt(request.getParameter(ORDER_STATUS));
         int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
-        String [] url = request.getHeader("referer").split("Delicious_Restaurant/");
 
         ServiceFactory.getInstance().getOrderService().setOrderStatus(orderStatus, orderId);
 
-
-        System.out.println("order status - " + orderStatus);
-        System.out.println("order id - " + orderId);
-
-        return url[1];
+        return redirect(request);
     }
 }

@@ -53,7 +53,8 @@
                                                class="form-control form-control-lg"
                                                maxlength="100"
                                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
-                                               required/>
+                                               value="${ requestScope.login_email }"
+                                               required />
                                         <span class="invalid-feedback"><fmt:message key="sign_up.inv.email"/></span>
                                     </div>
 

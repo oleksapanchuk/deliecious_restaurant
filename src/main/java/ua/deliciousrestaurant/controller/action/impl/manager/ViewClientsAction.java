@@ -4,7 +4,6 @@ import ua.deliciousrestaurant.controller.action.Action;
 import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.dto.ClientDTO;
-import ua.deliciousrestaurant.model.dto.ProductDTO;
 import ua.deliciousrestaurant.service.ServiceFactory;
 import ua.deliciousrestaurant.utils.query.QueryBuilder;
 
@@ -12,13 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import static ua.deliciousrestaurant.constant.ActionConstant.*;
-import static ua.deliciousrestaurant.constant.ActionConstant.LOCALE;
-import static ua.deliciousrestaurant.utils.PaginationUtil.paginate;
-import static ua.deliciousrestaurant.utils.query.QueryConstant.SELECT_PRODUCT_NUMBER;
 
 public class ViewClientsAction implements Action {
 
@@ -50,6 +44,6 @@ public class ViewClientsAction implements Action {
         } catch (DaoException e) {
             throw new RuntimeException(e);
         }
-        return CLIENTS_PAGE;
+        return PAGE_CLIENTS;
     }
 }

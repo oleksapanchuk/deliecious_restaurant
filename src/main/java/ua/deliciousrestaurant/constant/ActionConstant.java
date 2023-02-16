@@ -1,6 +1,9 @@
 package ua.deliciousrestaurant.constant;
 
 public final class ActionConstant {
+    public static final String POST = "post";
+    public static final String GET = "get";
+
 
     /* ACTION */
     public static final String ACTION_DEFAULT = "default";
@@ -13,6 +16,7 @@ public final class ActionConstant {
     public static final String ACTION_ORDER_ALL = "order-all";
     public static final String ACTION_VIEW_MENU = "view-menu";
     public static final String ACTION_VIEW_CART = "view-cart";
+    public static final String ACTION_EDIT_PROFILE = "edit_profile";
     public static final String ACTION_VIEW_ORDERS_FOR_USER = "view-orders-for-user";
     public static final String ACTION_SET_LIKE_FOR_ORDER = "set-like-for-order";
     public static final String ACTION_VIEW_CLIENT_ACCOUNT = "view-client-account";
@@ -23,22 +27,24 @@ public final class ActionConstant {
 
 
     /* PAGES */
-    public static final String HREF_ORDER_PAGE_CLIENT = "controller?action=view-orders-for-user&sort_field=order_date&sort_order=des&client_id_filter=-1&order_status=-1&offset=0&records=8&cur_page=1";
-    public static final String HREF_ORDER_PAGE_MANAGER = "controller?action=view-orders-for-managers&sort_field=order_id&sort_order=des&client_id_filter=0&order_status=-1&offset=0&records=8&cur_page=1";
-
-    public static final String CONTROLLER_PAGE = "controller";
+    public static final String PAGE_CONTROLLER = "controller";
     public static final String INDEX_PAGE = "index.jsp";
     public static final String MENU_PAGE = "menu.jsp";
-    public static final String CART_PAGE = "controller?action="  + ACTION_VIEW_CART;
-    public static final String CART_PAGE_JSP = "cart.jsp";
-    public static final String ORDERS_PAGE_JSP = "orders.jsp";
-    public static final String ACCOUNT_PAGE = "client_account.jsp";
-    public static final String CLIENTS_PAGE = "client_manager.jsp";
-    public static final String MNG_ORDER_PAGE = "order_manager.jsp";
-    public static final String LOGIN_PAGE = "login.jsp";
-    public static final String SIGN_UP_PAGE = "sign_up.jsp";
 
+    public static final String PAGE_CART = "cart.jsp";
+    public static final String HREF_CART = "controller?action="  + ACTION_VIEW_CART;
 
+    public static final String PAGE_ACCOUNT = "client_account.jsp";
+    public static final String PAGE_CLIENTS = "client_manager.jsp";
+
+    public static final String PAGE_CLIENT_ORDERS = "orders.jsp";
+    public static final String PAGE_MANAGER_ORDERS = "order_manager.jsp";
+
+    public static final String PAGE_LOGIN = "login.jsp";
+    public static final String HREF_LOGIN = "controller?action=log-in";
+
+    public static final String PAGE_SIGN_UP = "sign_up.jsp";
+    public static final String HREF_SIGN_UP = "controller?action=sign-up";
 
 
     /* PARAMETERS */
@@ -64,28 +70,19 @@ public final class ActionConstant {
     public static final String CURRENT_PAGE = "cur_page";
     public static final String START_PAGE = "start";
     public static final String END_PAGE = "end";
-
-
     public static final String CART_LIST = "cart_list";
-
-
+    public static final String CART_ITEMS = "cart_items";
+    public static final String TOTAL_PRICE = "totalPrice";
     public static final String OPERATION = "operation";
     public static final String PRODUCT_ID = "prod_id";
+    public static final String QUANTITY = "quantity";
     public static final String ORDER_ID = "order-id";
     public static final String IS_LIKED_ORDER = "is-liked-order";
-
     public static final String ORDER_LIST = "order_list";
     public static final String FUNDS = "funds";
     public static final String VALID_STATUS = "valid_status";
-
-
-
-
     public static final String EMAIL = "login_email";
     public static final String PASSWORD = "login_password";
-
-
-
 
     /* VALUES PARAMETERS */
     public static final String INCREMENT = "inc";

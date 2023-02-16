@@ -27,6 +27,6 @@ public class RemoveFromCartAction implements Action {
                 }
             }
         }
-        return CART_PAGE;
+        return HREF_CART;
     }
 }

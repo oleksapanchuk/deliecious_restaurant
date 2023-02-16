@@ -16,6 +16,12 @@ import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
 
+    private static ClientDTO tempClientDTO;
+
+    public static ClientDTO getTempClientDTO() {
+        return tempClientDTO;
+    }
+
     @Override
     public List<ClientDTO> getAllClients() throws DaoException {
         return DaoFactory.getInstance().getClientDAO().getAllClients();
@@ -41,6 +47,8 @@ public class ClientServiceImpl implements ClientService {
         } catch (WrongPasswordException | DaoException e) {
             throw new WrongPasswordException();
         }
+
+        tempClientDTO = clientDTO;
 
         return clientDTO;
     }

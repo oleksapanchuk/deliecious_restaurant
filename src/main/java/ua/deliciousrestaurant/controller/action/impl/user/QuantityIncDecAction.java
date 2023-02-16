@@ -35,6 +35,6 @@ public class QuantityIncDecAction implements Action {
                 }
             }
         }
-        return CART_PAGE;
+        return HREF_CART;
     }
 }

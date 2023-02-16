@@ -4,7 +4,6 @@ import ua.deliciousrestaurant.exception.DaoException;
 import ua.deliciousrestaurant.exception.ServiceException;
 import ua.deliciousrestaurant.model.connection.DataSource;
 import ua.deliciousrestaurant.model.dao.DaoFactory;
-import ua.deliciousrestaurant.model.dto.ClientDTO;
 import ua.deliciousrestaurant.model.dto.ProductDTO;
 import ua.deliciousrestaurant.model.entity.Cart;
 import ua.deliciousrestaurant.service.ProductService;
@@ -25,18 +24,22 @@ import static ua.deliciousrestaurant.utils.query.QueryConstant.SELECT_PRODUCT_UA
 public class ProductServiceImpl implements ProductService {
 
     @Override
-    public List<Cart> getCartProducts(List<Cart> cartList) throws DaoException {
+    public List<Cart> getCartProducts(List<Cart> cartList, String locale) throws ServiceException {
+
         List<Cart> products = new ArrayList<>();
+        try {
+            if (!cartList.isEmpty()) {
+                for (Cart cart : cartList) {
+                        products.add(Cart.builder()
+                                .product(DaoFactory.getInstance().getProductDAO().getProductById(cart.getProduct().getIdProduct(), locale).get())
+                                .quantity(cart.getQuantity())
+                                .build());
 
-        if (!cartList.isEmpty()) {
-            for (Cart cart : cartList) {
-                products.add(Cart.builder()
-                        .product(DaoFactory.getInstance().getProductDAO().getProductById(cart.getProduct().getIdProduct()).get())
-                        .quantity(cart.getQuantity())
-                        .build());
+                }
             }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
-
         return products;
     }
 

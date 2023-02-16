@@ -66,7 +66,7 @@ public class ViewOrdersForUserAction implements Action {
             throw new RuntimeException(e);
         }
 
-        return ORDERS_PAGE_JSP;
+        return PAGE_CLIENT_ORDERS;
     }
 
 }

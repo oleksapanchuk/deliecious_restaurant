@@ -17,7 +17,8 @@ public class DBConstant {
 
     public static final String GET_TOTAL_PRICE = "SELECT prod_cost FROM product WHERE prod_id = ?";
 
-    public static final String GET_PRODUCT_BY_ID = "SELECT p.prod_id, p.prod_ua_name, c.category_ua_name, p.prod_cost, p.prod_weight, p.prod_img FROM product p JOIN category c ON p.category_id = c.category_id WHERE p.prod_id = ?";
+    public static final String GET_PRODUCT_BY_ID_ENG = "SELECT p.prod_id, p.prod_eng_name, c.category_eng_name, p.prod_cost, p.prod_weight, p.prod_img FROM product p JOIN category c ON p.category_id = c.category_id WHERE p.prod_id = ?";
+    public static final String GET_PRODUCT_BY_ID_UA = "SELECT p.prod_id, p.prod_ua_name, c.category_ua_name, p.prod_cost, p.prod_weight, p.prod_img FROM product p JOIN category c ON p.category_id = c.category_id WHERE p.prod_id = ?";
 
 
     /* PRODUCT */

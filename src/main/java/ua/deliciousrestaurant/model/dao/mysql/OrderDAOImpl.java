@@ -164,7 +164,7 @@ public class OrderDAOImpl implements OrderDAO {
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     listCart.add(Cart.builder()
-                            .product(DaoFactory.getInstance().getProductDAO().getProductById(rs.getInt(2)).get())
+                            .product(DaoFactory.getInstance().getProductDAO().getProductById(rs.getInt(2), "en").get())
                             .quantity(rs.getInt(3))
                             .build());
                 }

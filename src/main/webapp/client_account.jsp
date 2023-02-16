@@ -100,13 +100,9 @@
                                         </c:otherwise>
                                     </c:choose>
 
-                                    <div class="col-5 d-flex justify-content-center mt-4">
-                                        <a href="#"
-                                           class="nav-link mx-2 text-uppercase my-btn-red">
-                                            <i class="far fa-edit me-1"></i><fmt:message
-                                                key="account.btn.edit.profile"/>
-                                        </a>
-                                    </div>
+<%--                                    <div class="col-5 d-flex justify-content-center mt-4">--%>
+<%--                                        <%@include file="fragments/edit_profile.jsp" %>--%>
+<%--                                    </div>--%>
 
                                     <div class="col-3 d-flex justify-content-end mt-4">
                                         <a href="controller?action=log_out"

@@ -42,7 +42,7 @@
                         <th scope="col"><fmt:message key="order.date"/></th>
                         <th scope="col" class="text-center"><fmt:message key="order.total.price"/></th>
                         <th scope="col" class="text-center"><fmt:message key="order.status"/></th>
-                        <th scope="col" class="text-center"><fmt:message key="order.details"/></th>
+<%--                        <th scope="col" class="text-center"><fmt:message key="order.details"/></th>--%>
                         <th scope="col" class="text-center"><fmt:message key="order.liked"/></th>
                     </tr>
                     </thead>
@@ -95,11 +95,11 @@
                                 </c:choose>
 
                             </td>
-                            <td class="text-center">
-                                <a class="btn btn-warning" href="#">
-                                    <fmt:message key="order.show.more"/>
-                                </a>
-                            </td>
+<%--                            <td class="text-center">--%>
+<%--                                <a class="btn btn-warning" href="#">--%>
+<%--                                    <fmt:message key="order.show.more"/>--%>
+<%--                                </a>--%>
+<%--                            </td>--%>
                             <td class="text-center">
                                 <c:choose>
                                     <c:when test="${ order.isOrderLiked() }">
